@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ResumeService</name>
+    </assembly>
+    <members>
+        <member name="T:ResumeService.Migrations.createinit">
+            <inheritdoc />
+        </member>
+        <member name="M:ResumeService.Migrations.createinit.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ResumeService.Migrations.createinit.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ResumeService.Migrations.createinit.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

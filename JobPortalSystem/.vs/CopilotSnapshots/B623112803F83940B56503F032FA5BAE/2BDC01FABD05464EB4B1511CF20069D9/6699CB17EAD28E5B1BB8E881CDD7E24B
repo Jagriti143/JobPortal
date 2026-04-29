@@ -1,0 +1,329 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ResumeService.Common;
+using ResumeService.Data.Entities;
+using ResumeService.Models.DTOs;
+using ResumeService.Repositories.Interfaces;
+using ResumeService.Services;
+using System.Security.Claims;
+using ResumeService.Data;
+using MassTransit;
+using Microsoft.EntityFrameworkCore;
+
+namespace ResumeService.Controllers;
+
+[ApiController]
+[Route("resumes")]
+public class ResumesController(
+    IResumeRepository resumeRepository,
+    IPdfGeneratorService pdfService,
+    ResumeDbContext db,
+    IPublishEndpoint publishEndpoint,
+    ILogger<ResumesController> logger) : ControllerBase
+{
+    private Guid GetUserId() =>
+        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)
+            ?? User.FindFirstValue("sub")
+            ?? Guid.Empty.ToString());
+
+    // ---------------- GET TEMPLATES ----------------
+
+    [HttpGet("templates")]
+    public IActionResult GetTemplates() =>
+        Ok(ResponseEnvelope<object>.Ok(
+            new[]
+            {
+                new { templateId = "Classic",  name = "Classic" },
+                new { templateId = "Modern",   name = "Modern" },
+                new { templateId = "Minimal",  name = "Minimal" },
+                new { templateId = "Creative", name = "Creative" }
+            },
+            traceId: HttpContext.TraceIdentifier));
+
+    // ---------------- GET MY RESUMES ----------------
+
+    [HttpGet("my")]
+    [Authorize(Roles = "JobSeeker")]
+    public async Task<IActionResult> GetMyResumes()
+    {
+        var ownerId = GetUserId();
+
+        var resumes = await resumeRepository.GetResumesByOwnerAsync(ownerId);
+
+        var dtos = resumes.Select(r => new
+        {
+            r.Id,
+            r.Title,
+            r.Summary,
+            r.TemplateId,
+            r.UpdatedAt
+        });
+
+        return Ok(ResponseEnvelope<object>.Ok(dtos, traceId: HttpContext.TraceIdentifier));
+    }
+
+    // ---------------- CREATE RESUME ----------------
+
+    [HttpPost]
+    [Authorize(Roles = "JobSeeker")]
+    public async Task<IActionResult> CreateResume([FromBody] CreateResumeRequest req)
+    {
+        var ownerId = GetUserId();
+
+        var resume = new Resume
+        {
+            OwnerId = ownerId,
+            Title = req.Title,
+            Summary = req.Summary,
+            TemplateId = req.TemplateId ?? "Classic",
+            Certifications = req.Certifications
+        };
+
+        if (req.Educations != null)
+            foreach (var e in req.Educations)
+                resume.Educations.Add(new ResumeEducation
+                {
+                    Institution = e.Institution,
+                    Degree = e.Degree,
+                    FieldOfStudy = e.FieldOfStudy,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate
+                });
+
+        if (req.Experiences != null)
+            foreach (var e in req.Experiences)
+                resume.Experiences.Add(new ResumeExperience
+                {
+                    Company = e.Company,
+                    JobTitle = e.JobTitle,
+                    Description = e.Description,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate,
+                    IsCurrentRole = e.IsCurrentRole
+                });
+
+        if (req.Skills != null)
+            foreach (var s in req.Skills)
+                resume.Skills.Add(new ResumeSkill
+                {
+                    Name = s.Name,
+                    Level = s.Level
+                });
+
+        if (req.Projects != null)
+            foreach (var p in req.Projects)
+                resume.Projects.Add(new ResumeProject
+                {
+                    Name = p.Name,
+                    Description = p.Description,
+                    Url = p.Url
+                });
+
+        await resumeRepository.AddResumeAsync(resume);
+
+        return StatusCode(201,
+            ResponseEnvelope<object>.Ok(
+                new { resumeId = resume.Id },
+                traceId: HttpContext.TraceIdentifier));
+    }
+
+    // ---------------- UPDATE RESUME ----------------
+
+    [HttpPut("{resumeId:guid}")]
+    [Authorize(Roles = "JobSeeker")]
+    public async Task<IActionResult> UpdateResume(Guid resumeId, [FromBody] CreateResumeRequest req)
+    {
+        var ownerId = GetUserId();
+
+        var resume = await resumeRepository.GetResumeWithDetailsAsync(resumeId);
+
+        if (resume == null)
+            return NotFound(ResponseEnvelope<object>.Fail("Resume not found.", HttpContext.TraceIdentifier));
+
+        if (resume.OwnerId != ownerId)
+            return Forbid();
+
+        // Update basic fields
+        resume.Title = req.Title;
+        resume.Summary = req.Summary;
+        resume.TemplateId = req.TemplateId ?? resume.TemplateId;
+        resume.Certifications = req.Certifications;
+        resume.UpdatedAt = DateTime.UtcNow;
+
+        // Clear existing children (but don’t save yet)
+        db.Educations.RemoveRange(resume.Educations);
+        db.Experiences.RemoveRange(resume.Experiences);
+        db.Skills.RemoveRange(resume.Skills);
+        db.Projects.RemoveRange(resume.Projects);
+
+        // Add new children
+        if (req.Educations != null)
+        {
+            foreach (var e in req.Educations)
+            {
+                resume.Educations.Add(new ResumeEducation
+                {
+                    Institution = e.Institution,
+                    Degree = e.Degree,
+                    FieldOfStudy = e.FieldOfStudy,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate
+                });
+            }
+        }
+
+        if (req.Experiences != null)
+        {
+            foreach (var e in req.Experiences)
+            {
+                resume.Experiences.Add(new ResumeExperience
+                {
+                    Company = e.Company,
+                    JobTitle = e.JobTitle,
+                    Description = e.Description,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate,
+                    IsCurrentRole = e.IsCurrentRole
+                });
+            }
+        }
+
+        if (req.Skills != null)
+        {
+            foreach (var s in req.Skills)
+            {
+                resume.Skills.Add(new ResumeSkill
+                {
+                    Name = s.Name,
+                    Level = s.Level
+                });
+            }
+        }
+
+        if (req.Projects != null)
+        {
+            foreach (var p in req.Projects)
+            {
+                resume.Projects.Add(new ResumeProject
+                {
+                    Name = p.Name,
+                    Description = p.Description,
+                    Url = p.Url
+                });
+            }
+        }
+
+        db.Attach(resume);
+        db.Entry(resume).State = EntityState.Modified;
+
+        // Commit all changes in one go
+        await db.SaveChangesAsync();
+
+        return Ok(ResponseEnvelope<object>.Ok(
+            new { resumeId },
+            traceId: HttpContext.TraceIdentifier));
+    }   
+
+    // ---------------- GET PDF ----------------
+
+    [HttpGet("{resumeId:guid}/pdf")]
+    [Authorize(Roles = "JobSeeker")]
+    public async Task<IActionResult> GetPdf(Guid resumeId)
+    {
+        var ownerId = GetUserId();
+
+        var resume = await resumeRepository.GetResumeWithDetailsAsync(resumeId);
+
+        if (resume == null)
+            return NotFound(ResponseEnvelope<object>.Fail("Resume not found.", HttpContext.TraceIdentifier));
+
+        if (resume.OwnerId != ownerId)
+            return Forbid();
+
+        var pdf = pdfService.GeneratePdf(resume);
+
+        return File(pdf, "application/pdf", $"resume-{resumeId}.pdf");
+    }
+
+    // ---------------- UNLOCK RESUME ----------------
+
+    [HttpPost("{resumeId:guid}/unlock")]
+    [Authorize(Roles = "Recruiter")]
+    public async Task<IActionResult> UnlockResume(Guid resumeId)
+    {
+        var recruiterId = GetUserId();
+        var traceId = HttpContext.TraceIdentifier;
+
+        var resume = await resumeRepository.GetResumeWithDetailsAsync(resumeId);
+
+        if (resume == null)
+            return NotFound(ResponseEnvelope<object>.Fail("Resume not found.", traceId));
+
+        var req = new ResumeUnlockRequest
+        {
+            RecruiterId = recruiterId,
+            ResumeId = resumeId,
+            Status = "Pending"
+        };
+
+        db.ResumeUnlockRequests.Add(req);
+        await db.SaveChangesAsync();
+
+        await publishEndpoint.Publish(
+            new JobPortalSystem.Messages.UnlockResumeRequested(req.Id, recruiterId, resumeId));
+
+        return Accepted(ResponseEnvelope<object>.Ok(
+            new { unlockRequestId = req.Id, status = "Processing" },
+            traceId: traceId));
+    }
+
+    // ---------------- UNLOCK STATUS ----------------
+
+    [HttpGet("unlock-status/{unlockRequestId:guid}")]
+    [Authorize(Roles = "Recruiter")]
+    public async Task<IActionResult> GetUnlockStatus(Guid unlockRequestId)
+    {
+        var recruiterId = GetUserId();
+        var traceId = HttpContext.TraceIdentifier;
+
+        var req = await db.ResumeUnlockRequests.FindAsync(unlockRequestId);
+
+        if (req == null)
+            return NotFound(ResponseEnvelope<object>.Fail("Unlock request not found.", traceId));
+
+        if (req.RecruiterId != recruiterId)
+            return Forbid();
+
+        return Ok(ResponseEnvelope<object>.Ok(
+            new { unlockRequestId, status = req.Status },
+            traceId: traceId));
+    }
+
+    // ---------------- VIEW RESUME ----------------
+
+    [HttpGet("{resumeId:guid}/view")]
+    [Authorize(Roles = "Recruiter")]
+    public async Task<IActionResult> ViewResume(Guid resumeId)
+    {
+        var recruiterId = GetUserId();
+        var traceId = HttpContext.TraceIdentifier;
+
+        var isUnlocked = await db.UnlockedResumes
+            .AnyAsync(u => u.RecruiterId == recruiterId && u.ResumeId == resumeId);
+
+        if (!isUnlocked)
+            return StatusCode(402,
+                ResponseEnvelope<object>.Fail(
+                    "Payment Required. Please unlock this resume first.",
+                    traceId));
+
+        var resume = await resumeRepository.GetResumeWithDetailsAsync(resumeId);
+
+        if (resume == null)
+            return NotFound(ResponseEnvelope<object>.Fail("Resume not found.", traceId));
+
+        var dto = ResumeResponseDto.FromEntity(resume);
+
+        return Ok(ResponseEnvelope<object>.Ok(dto, traceId: traceId));
+    }
+}

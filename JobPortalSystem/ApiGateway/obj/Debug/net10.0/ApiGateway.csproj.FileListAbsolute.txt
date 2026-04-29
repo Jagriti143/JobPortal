@@ -1,0 +1,264 @@
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.Development.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.staticwebassets.endpoints.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.exe
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ocelot.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.deps.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.runtimeconfig.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.pdb
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.xml
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\FluentValidation.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\IPAddressRange.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.Bson.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Ocelot.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.AspNetCore.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Logging.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Formatting.Compact.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Settings.Configuration.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Console.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.File.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.AssemblyReference.cache
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfoInputs.cache
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfo.cs
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.CoreCompileInputs.cache
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cs
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cache
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.sourcelink.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\scopedcss\bundle\ApiGateway.styles.css
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.development.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\swae.build.ex.cache
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.Up2Date
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\refint\ApiGateway.dll
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.xml
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.pdb
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.genruntimeconfig.cache
+C:\Sprint Job Portal Github Remote\Job_Portal_Sprint\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ref\ApiGateway.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.staticwebassets.endpoints.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.exe
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ocelot.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.deps.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.runtimeconfig.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.pdb
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.xml
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\FluentValidation.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\IPAddressRange.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.Bson.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Ocelot.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.AspNetCore.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Logging.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Formatting.Compact.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Settings.Configuration.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Console.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.File.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.AssemblyReference.cache
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfoInputs.cache
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfo.cs
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.CoreCompileInputs.cache
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\scopedcss\bundle\ApiGateway.styles.css
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.Up2Date
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\refint\ApiGateway.dll
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.xml
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.pdb
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.genruntimeconfig.cache
+C:\Users\Karan\Desktop\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ref\ApiGateway.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.staticwebassets.endpoints.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.exe
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ocelot.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.deps.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.runtimeconfig.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.pdb
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.xml
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\FluentValidation.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\IPAddressRange.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.Bson.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Ocelot.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.AspNetCore.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Logging.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Formatting.Compact.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Settings.Configuration.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Console.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.File.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.AssemblyReference.cache
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfoInputs.cache
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfo.cs
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.CoreCompileInputs.cache
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\scopedcss\bundle\ApiGateway.styles.css
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.Up2Date
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\refint\ApiGateway.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.xml
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.pdb
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.genruntimeconfig.cache
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ref\ApiGateway.dll
+C:\Users\Karan\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\appsettings.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.staticwebassets.endpoints.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.exe
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ocelot.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.deps.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.runtimeconfig.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.pdb
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\ApiGateway.xml
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\FluentValidation.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\IPAddressRange.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Newtonsoft.Json.Bson.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Ocelot.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.AspNetCore.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Extensions.Logging.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Formatting.Compact.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Settings.Configuration.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Console.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Serilog.Sinks.File.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.AssemblyReference.cache
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfoInputs.cache
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.AssemblyInfo.cs
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.CoreCompileInputs.cache
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\scopedcss\bundle\ApiGateway.styles.css
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.csproj.Up2Date
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\refint\ApiGateway.dll
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.xml
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.pdb
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ApiGateway.genruntimeconfig.cache
+C:\Users\Jagriti\Desktop\Jop Portal\JobPortalSystem\ApiGateway\obj\Debug\net10.0\ref\ApiGateway.dll

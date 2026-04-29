@@ -1,0 +1,494 @@
+{
+  "Routes": [
+
+    // =========================================================================
+    // IDENTITY SERVICE  :5001
+    // =========================================================================
+
+    {
+      "UpstreamPathTemplate": "/gateway/auth/register",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/auth/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/verify-email",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/auth/verify-email",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/login",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/auth/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/refresh-token",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/auth/refresh-token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/logout",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/auth/logout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/forgot-password",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/auth/forgot-password",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/reset-password",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/auth/reset-password",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/me",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/auth/me",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/me",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "DownstreamPathTemplate": "/auth/me",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/auth/public-key",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/auth/public-key",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5001 } ]
+    },
+
+    // =========================================================================
+    // JOB CATALOG SERVICE  :5002
+    // =========================================================================
+
+    {
+      "UpstreamPathTemplate": "/gateway/jobs/search",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/jobs/search",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/jobs/company/{companyId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/jobs/company/{companyId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/jobs/{jobId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/jobs/{jobId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/jobs",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/jobs",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/jobs/{jobId}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "DownstreamPathTemplate": "/jobs/{jobId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/jobs/{jobId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "DownstreamPathTemplate": "/jobs/{jobId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/jobs/{jobId}/status",
+      "UpstreamHttpMethod": [ "PATCH" ],
+      "DownstreamPathTemplate": "/jobs/{jobId}/status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/companies",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/companies",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/companies/{companyId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/companies/{companyId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/companies/{companyId}/reviews",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/companies/{companyId}/reviews",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/companies/{companyId}/reviews",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/companies/{companyId}/reviews",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5002 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+
+    // =========================================================================
+    // APPLICATION SERVICE  :5003
+    // =========================================================================
+
+    {
+      "UpstreamPathTemplate": "/gateway/applications",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/applications",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5003 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/applications/my",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/applications/my",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5003 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/applications/job/{jobId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/applications/job/{jobId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5003 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/applications/{applicationId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/applications/{applicationId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5003 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/applications/{applicationId}/status",
+      "UpstreamHttpMethod": [ "PATCH" ],
+      "DownstreamPathTemplate": "/applications/{applicationId}/status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5003 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/applications/{applicationId}/shortlist",
+      "UpstreamHttpMethod": [ "PATCH" ],
+      "DownstreamPathTemplate": "/applications/{applicationId}/shortlist",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5003 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/applications/{applicationId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "DownstreamPathTemplate": "/applications/{applicationId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5003 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+
+    // =========================================================================
+    // RESUME SERVICE  :5004
+    // =========================================================================
+
+    {
+      "UpstreamPathTemplate": "/gateway/resumes/templates",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/resumes/templates",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/resumes/my",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/resumes/my",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/resumes",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/resumes",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/resumes/{resumeId}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "DownstreamPathTemplate": "/resumes/{resumeId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/resumes/{resumeId}/pdf",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/resumes/{resumeId}/pdf",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/resumes/{resumeId}/unlock",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/resumes/{resumeId}/unlock",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/resumes/unlock-status/{unlockRequestId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/resumes/unlock-status/{unlockRequestId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/resumes/{resumeId}/view",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/resumes/{resumeId}/view",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5004 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+
+    // =========================================================================
+    // PAYMENT SERVICE  :5005
+    // =========================================================================
+
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/balance",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/payments/wallet/balance",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/config",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/payments/config",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/purchase",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/purchase",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/verify-payment",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/verify-payment",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/add-points",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/add-points",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/webhook",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/webhook",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/unlock-contact",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/unlock-contact",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/deduct-resume-view",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/deduct-resume-view",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/unlock-status",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/unlock-status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/deduct-resume-download",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/payments/wallet/deduct-resume-download",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/wallet/transactions",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/payments/wallet/transactions",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/admin/transactions",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/payments/admin/transactions",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/payments/admin/revenue",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/payments/admin/revenue",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5005 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+
+    // =========================================================================
+    // ADMIN SERVICE  :5006
+    // =========================================================================
+
+    {
+      "UpstreamPathTemplate": "/gateway/admin/users",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/admin/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/users/{userId}/role",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "DownstreamPathTemplate": "/admin/users/{userId}/role",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/users/{userId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "DownstreamPathTemplate": "/admin/users/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/jobs/moderation-queue",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/admin/jobs/moderation-queue",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/jobs/{jobId}/approve",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/admin/jobs/{jobId}/approve",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/jobs/{jobId}/flag",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/admin/jobs/{jobId}/flag",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/audit-logs",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/admin/audit-logs",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/reports/transactions",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/admin/reports/transactions",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/admin/reports/revenue",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/admin/reports/revenue",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "localhost", "Port": 5006 } ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" }
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000",
+    "RateLimitOptions": {
+      "EnableRateLimiting": true,
+      "Period": "1m",
+      "PeriodTimespan": 60,
+      "Limit": 100,
+      "ClientIdHeader": "X-Forwarded-For"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApplicationService</name>
+    </assembly>
+    <members>
+        <member name="M:ApplicationService.Controllers.ApplicationsController.Apply(ApplicationService.Models.CreateApplicationRequest)">
+            <summary>Apply to a job (JobSeeker only).</summary>
+        </member>
+        <member name="M:ApplicationService.Controllers.ApplicationsController.GetMyApplications">
+            <summary>Get my applications (JobSeeker).</summary>
+        </member>
+        <member name="M:ApplicationService.Controllers.ApplicationsController.GetApplication(System.Guid)">
+            <summary>Get application by ID.</summary>
+        </member>
+        <member name="M:ApplicationService.Controllers.ApplicationsController.GetJobApplications(System.Guid,System.String,System.Nullable{System.Boolean})">
+            <summary>Get all applications for a job (Recruiter).</summary>
+        </member>
+        <member name="M:ApplicationService.Controllers.ApplicationsController.UpdateStatus(System.Guid,ApplicationService.Models.UpdateStatusRequest)">
+            <summary>Update application status (Recruiter).</summary>
+        </member>
+        <member name="M:ApplicationService.Controllers.ApplicationsController.Shortlist(System.Guid)">
+            <summary>Shortlist a candidate (Recruiter).</summary>
+        </member>
+        <member name="M:ApplicationService.Controllers.ApplicationsController.Withdraw(System.Guid)">
+            <summary>Withdraw application (JobSeeker, only when Submitted).</summary>
+        </member>
+        <member name="T:ApplicationService.Migrations.createinit">
+            <inheritdoc />
+        </member>
+        <member name="M:ApplicationService.Migrations.createinit.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApplicationService.Migrations.createinit.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApplicationService.Migrations.createinit.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

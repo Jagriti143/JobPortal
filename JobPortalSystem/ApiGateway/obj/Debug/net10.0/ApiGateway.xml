@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiGateway</name>
+    </assembly>
+    <members>
+        <member name="T:ApiGateway.Middleware.CorrelationIdMiddleware">
+            <summary>
+            Generates a unique X-Correlation-ID for every request and propagates it
+            downstream so all microservices log the same ID for a single user request.
+            </summary>
+        </member>
+        <member name="M:ApiGateway.Middleware.CorrelationIdMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Generates a unique X-Correlation-ID for every request and propagates it
+            downstream so all microservices log the same ID for a single user request.
+            </summary>
+        </member>
+    </members>
+</doc>

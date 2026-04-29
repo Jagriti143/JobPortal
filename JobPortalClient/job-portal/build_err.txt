@@ -1,0 +1,337 @@
+[33mΓ¥»[39m Building...
+[32mΓ£ö[39m Building...
+Application bundle generation failed. [5.300 seconds] - 2026-04-13T06:46:07.326Z
+
+X [ERROR] TS2322: Type '(req: HttpRequest<unknown>, next: HttpHandlerFn) => void' is not assignable to type 'HttpInterceptorFn'.
+  Type 'void' is not assignable to type 'Observable<HttpEvent<unknown>>'. [plugin angular-compiler]
+
+    src/app/core/interceptors/auth.interceptor.ts:5:13:
+      5 Γöé export const authInterceptor: HttpInterceptorFn = (req, next) => {
+        Γò╡              ~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2349: This expression is not callable.
+  Type '{ Authorization: any; }' has no call signatures. [plugin angular-compiler]
+
+    src/app/core/interceptors/auth.interceptor.ts:11:18:
+      11 Γöé       setHeaders: { Authorization: \`Bearer \${token}\` }
+         Γò╡                   ~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/core/interceptors/auth.interceptor.ts:11:35:
+      11 Γöé       setHeaders: { Authorization: \`Bearer \${token}\` }
+         Γò╡                                    ^
+
+
+X [ERROR] TS1136: Property assignment expected. [plugin angular-compiler]
+
+    src/app/core/interceptors/auth.interceptor.ts:11:36:
+      11 Γöé       setHeaders: { Authorization: \`Bearer \${token}\` }
+         Γò╡                                     ~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS1160: Unterminated template literal. [plugin angular-compiler]
+
+    src/app/core/interceptors/auth.interceptor.ts:17:0:
+      17 Γöé 
+         Γò╡ ^
+
+
+X [ERROR] NG8001: 'mat-divider' is not a known element:
+1. If 'mat-divider' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-divider' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message. [plugin angular-compiler]
+
+    src/app/features/jobs/job-detail/job-detail.component.ts:45:8:
+      45 Γöé         <mat-divider style="margin: 32px 0;"></mat-divider>
+         Γò╡         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG8001: 'mat-divider' is not a known element:
+1. If 'mat-divider' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-divider' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message. [plugin angular-compiler]
+
+    src/app/features/jobs/job-detail/job-detail.component.ts:54:10:
+      54 Γöé           <mat-divider style="margin-bottom: 24px;"></mat-divider>
+         Γò╡           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2345: Argument of type 'Partial<{ q: string | null; location: string | null; jobType: string | null; salaryMin: string | null; salaryMax: string | null; }>' is not assignable to parameter of type 'JobSearchParams'.
+  Types of property 'q' are incompatible.
+    Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'. [plugin angular-compiler]
+
+    src/app/features/jobs/job-list/job-list.component.ts:144:31:
+      144 Γöé     this.jobService.searchJobs(this.filterForm.value).subscribe({
+          Γò╡                                ~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2339: Property 'total' does not exist on type '{ page: number; limit: number; }'. [plugin angular-compiler]
+
+    src/app/features/jobs/job-list/job-list.component.ts:149:43:
+      149 Γöé ...      this.totalJobs = res.pagination?.total || this.jobs.length;
+          Γò╡                                           ~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/auth.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/recruiter/dashboard/recruiter-dashboard.component.ts:7:28:
+      7 Γöé import { AuthService } from '../../../../core/services/auth.service';
+        Γò╡                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/job.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/recruiter/dashboard/recruiter-dashboard.component.ts:8:27:
+      8 Γöé import { JobService } from '../../../../core/services/job.service';
+        Γò╡                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/job.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/recruiter/jobs/post-job.component.ts:11:27:
+      11 Γöé import { JobService } from '../../../../core/services/job.service';
+         Γò╡                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/recruiter/jobs/post-job.component.ts:134:4:
+      134 Γöé     this.jobService.createJob(req).subscribe({
+          Γò╡     ~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/wallet.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:10:30:
+      10 Γöé ...{ WalletService } from '../../../../core/services/wallet.service';
+         Γò╡                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:97:4:
+      97 Γöé     this.wallet.getWalletBalance().subscribe({ next: res => { if (...
+         Γò╡     ~~~~~~~~~~~
+
+
+X [ERROR] TS7006: Parameter 'res' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:97:53:
+      97 Γöé ...etBalance().subscribe({ next: res => { if (res.data) this.balan...
+         Γò╡                                  ~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:98:4:
+      98 Γöé     this.wallet.getTransactions().subscribe({ next: res => { if (r...
+         Γò╡     ~~~~~~~~~~~
+
+
+X [ERROR] TS7006: Parameter 'res' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:98:52:
+      98 Γöé ...nsactions().subscribe({ next: res => { if (res.data) this.trans...
+         Γò╡                                  ~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:104:4:
+      104 Γöé     this.wallet.addFunds(this.topupAmount).subscribe({
+          Γò╡     ~~~~~~~~~~~
+
+
+X [ERROR] TS7006: Parameter 'res' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:105:13:
+      105 Γöé       next: (res) => {
+          Γò╡              ~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/recruiter/wallet/wallet.component.ts:107:8:
+      107 Γöé         this.wallet.confirmPayment(res.data?.transactionId || 'mo...
+          Γò╡         ~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/auth.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:8:28:
+      8 Γöé import { AuthService } from '../../../../core/services/auth.service';
+        Γò╡                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/application.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:9:35:
+      9 Γöé ...tionService } from '../../../../core/services/application.service';
+        Γò╡                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:20:55:
+      20 Γöé ...uted">Welcome back, {{ (auth.user$ | async)?.displayName || 'Jo...
+         Γò╡                                 ~~~~~
+
+
+X [ERROR] TS2339: Property 'displayName' does not exist on type '{}'. [plugin angular-compiler]
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:20:71:
+      20 Γöé ...back, {{ (auth.user$ | async)?.displayName || 'Job Seeker' }}!</p>
+         Γò╡                                   ~~~~~~~~~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:92:4:
+      92 Γöé     this.appService.getMyApplications().subscribe({
+         Γò╡     ~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS7006: Parameter 'res' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:93:12:
+      93 Γöé       next: res => { if (res.data) this.applications = res.data; }
+         Γò╡             ~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/resume.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/resume-form.component.ts:10:30:
+      10 Γöé ...{ ResumeService } from '../../../../core/services/resume.service';
+         Γò╡                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/resume-form.component.ts:110:6:
+      110 Γöé       this.resumeService.getResume(this.resumeId).subscribe({
+          Γò╡       ~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS7006: Parameter 'res' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/resume-form.component.ts:111:14:
+      111 Γöé         next: res => { if (res.data) this.patchResume(res.data); }
+          Γò╡               ~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/resume-form.component.ts:132:8:
+      132 Γöé       ? this.resumeService.updateResume(this.resumeId!, this.form...
+          Γò╡         ~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/resume-form.component.ts:133:8:
+      133 Γöé       : this.resumeService.createResume(this.form.value.title as ...
+          Γò╡         ~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../../core/services/resume.service' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/seeker-resumes.component.ts:7:30:
+      7 Γöé ... { ResumeService } from '../../../../core/services/resume.service';
+        Γò╡                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2571: Object is of type 'unknown'. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/seeker-resumes.component.ts:63:4:
+      63 Γöé     this.resumeService.getMyResumes().subscribe({
+         Γò╡     ~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS7006: Parameter 'res' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/features/seeker/resumes/seeker-resumes.component.ts:64:12:
+      64 Γöé       next: res => { if (res.data) this.resumes = res.data; }
+         Γò╡             ~~~
+
+
+X [ERROR] TS2305: Module '"./app/app"' has no exported member 'App'. [plugin angular-compiler]
+
+    src/main.ts:3:9:
+      3 Γöé import { App } from './app/app';
+        Γò╡          ~~~
+
+
+X [ERROR] Could not resolve "@angular/animations/browser"
+
+    node_modules/@angular/platform-browser/fesm2022/animations-async.mjs:37:53:
+      37 Γöé ....moduleImpl ?? import('@angular/animations/browser').then(m => m);
+         Γò╡                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations/browser" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle. You can also add ".catch()" here to handle this failure at run-time instead of bundle-time.
+
+
+X [ERROR] Syntax error "`"
+
+    src/app/core/interceptors/auth.interceptor.ts:11:36:
+      11 Γöé       setHeaders: { Authorization: \`Bearer \${token}\` }
+         Γò╡                                     ^
+
+
+X [ERROR] Could not resolve "../../../../core/services/auth.service"
+
+    src/app/features/recruiter/dashboard/recruiter-dashboard.component.ts:7:28:
+      7 Γöé import { AuthService } from '../../../../core/services/auth.service';
+        Γò╡                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../../../core/services/job.service"
+
+    src/app/features/recruiter/dashboard/recruiter-dashboard.component.ts:8:27:
+      8 Γöé import { JobService } from '../../../../core/services/job.service';
+        Γò╡                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../../../core/services/job.service"
+
+    src/app/features/recruiter/jobs/post-job.component.ts:11:27:
+      11 Γöé import { JobService } from '../../../../core/services/job.service';
+         Γò╡                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../../../core/services/wallet.service"
+
+    src/app/features/recruiter/wallet/wallet.component.ts:10:30:
+      10 Γöé ...{ WalletService } from '../../../../core/services/wallet.service';
+         Γò╡                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../../../core/services/auth.service"
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:8:28:
+      8 Γöé import { AuthService } from '../../../../core/services/auth.service';
+        Γò╡                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../../../core/services/application.service"
+
+    src/app/features/seeker/dashboard/seeker-dashboard.component.ts:9:35:
+      9 Γöé ...tionService } from '../../../../core/services/application.service';
+        Γò╡                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../../../core/services/resume.service"
+
+    src/app/features/seeker/resumes/resume-form.component.ts:10:30:
+      10 Γöé ...{ ResumeService } from '../../../../core/services/resume.service';
+         Γò╡                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../../../core/services/resume.service"
+
+    src/app/features/seeker/resumes/seeker-resumes.component.ts:7:30:
+      7 Γöé ... { ResumeService } from '../../../../core/services/resume.service';
+        Γò╡                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

@@ -1,0 +1,265 @@
+[
+  {
+    "ContainingType": "JobCatalogService.Controllers.CompaniesController",
+    "Method": "CreateCompany",
+    "RelativePath": "companies",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "JobCatalogService.Models.DTOs.CreateCompanyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.CompaniesController",
+    "Method": "GetCompany",
+    "RelativePath": "companies/{companyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.CompaniesController",
+    "Method": "GetReviews",
+    "RelativePath": "companies/{companyId}/reviews",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.CompaniesController",
+    "Method": "AddReview",
+    "RelativePath": "companies/{companyId}/reviews",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "JobCatalogService.Models.DTOs.CreateReviewRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ocelot.Configuration.FileConfigurationController",
+    "Method": "Get",
+    "RelativePath": "configuration",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ocelot.Configuration.FileConfigurationController",
+    "Method": "Post",
+    "RelativePath": "configuration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileConfiguration",
+        "Type": "Ocelot.Configuration.File.FileConfiguration",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "CreateJob",
+    "RelativePath": "jobs",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "JobCatalogService.Models.DTOs.CreateJobRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "GetJob",
+    "RelativePath": "jobs/{jobId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "UpdateJob",
+    "RelativePath": "jobs/{jobId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "JobCatalogService.Models.DTOs.UpdateJobRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "DeleteJob",
+    "RelativePath": "jobs/{jobId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "UpdateStatus",
+    "RelativePath": "jobs/{jobId}/status",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "JobCatalogService.Models.DTOs.UpdateModerationStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "GetJobsByCompany",
+    "RelativePath": "jobs/company/{companyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "Search",
+    "RelativePath": "jobs/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "q",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "location",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "jobType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "salaryMin",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "salaryMax",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ocelot.Cache.OutputCacheController",
+    "Method": "Delete",
+    "RelativePath": "outputcache/{region}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "region",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

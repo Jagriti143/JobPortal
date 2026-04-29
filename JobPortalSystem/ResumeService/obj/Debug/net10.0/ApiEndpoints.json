@@ -1,0 +1,165 @@
+[
+  {
+    "ContainingType": "Ocelot.Configuration.FileConfigurationController",
+    "Method": "Get",
+    "RelativePath": "configuration",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ocelot.Configuration.FileConfigurationController",
+    "Method": "Post",
+    "RelativePath": "configuration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileConfiguration",
+        "Type": "Ocelot.Configuration.File.FileConfiguration",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ocelot.Cache.OutputCacheController",
+    "Method": "Delete",
+    "RelativePath": "outputcache/{region}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "region",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "CreateResume",
+    "RelativePath": "resumes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ResumeService.Models.DTOs.CreateResumeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "UpdateResume",
+    "RelativePath": "resumes/{resumeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resumeId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "ResumeService.Models.DTOs.CreateResumeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "GetPdf",
+    "RelativePath": "resumes/{resumeId}/pdf",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resumeId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "UnlockResume",
+    "RelativePath": "resumes/{resumeId}/unlock",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resumeId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "ViewResume",
+    "RelativePath": "resumes/{resumeId}/view",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resumeId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "GetMyResumes",
+    "RelativePath": "resumes/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "GetTemplates",
+    "RelativePath": "resumes/templates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "GetUnlockStatus",
+    "RelativePath": "resumes/unlock-status/{unlockRequestId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "unlockRequestId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

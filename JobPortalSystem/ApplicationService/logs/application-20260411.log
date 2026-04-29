@@ -1,0 +1,10 @@
+{"@t":"2026-04-11T07:04:30.7199921Z","@mt":"User profile is available. Using '{FullName}' as key repository and Windows DPAPI to encrypt keys at rest.","FullName":"C:\\Users\\Karan\\AppData\\Local\\ASP.NET\\DataProtection-Keys","EventId":{"Id":63,"Name":"UsingProfileAsKeyRepositoryWithDPAPI"},"SourceContext":"Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager"}
+{"@t":"2026-04-11T07:04:33.0400060Z","@mt":"Now listening on: {address}","address":"http://localhost:5003","EventId":{"Id":14,"Name":"ListeningOnAddress"},"SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:04:33.6829050Z","@mt":"Application started. Press Ctrl+C to shut down.","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:04:33.6937487Z","@mt":"Hosting environment: {EnvName}","EnvName":"Development","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:04:33.6979665Z","@mt":"Content root path: {ContentRoot}","ContentRoot":"C:\\Users\\Karan\\Desktop\\Jop Portal\\JobPortalSystem\\ApplicationService","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:51.4699336Z","@mt":"User profile is available. Using '{FullName}' as key repository and Windows DPAPI to encrypt keys at rest.","FullName":"C:\\Users\\Karan\\AppData\\Local\\ASP.NET\\DataProtection-Keys","EventId":{"Id":63,"Name":"UsingProfileAsKeyRepositoryWithDPAPI"},"SourceContext":"Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager"}
+{"@t":"2026-04-11T07:20:52.7976009Z","@mt":"Now listening on: {address}","address":"http://localhost:5003","EventId":{"Id":14,"Name":"ListeningOnAddress"},"SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:53.2449881Z","@mt":"Application started. Press Ctrl+C to shut down.","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:53.2562472Z","@mt":"Hosting environment: {EnvName}","EnvName":"Development","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:53.2653387Z","@mt":"Content root path: {ContentRoot}","ContentRoot":"C:\\Users\\Karan\\Desktop\\Jop Portal\\JobPortalSystem\\ApplicationService","SourceContext":"Microsoft.Hosting.Lifetime"}

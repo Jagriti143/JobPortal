@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JobCatalogService</name>
+    </assembly>
+    <members>
+        <member name="M:JobCatalogService.Controllers.CompaniesController.GetCompany(System.Guid)">
+            <summary>Get company profile.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.CompaniesController.GetReviews(System.Guid)">
+            <summary>Get company reviews.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.CompaniesController.AddReview(System.Guid,JobCatalogService.Models.DTOs.CreateReviewRequest)">
+            <summary>Submit a company review (JobSeeker only).</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.CompaniesController.CreateCompany(JobCatalogService.Models.DTOs.CreateCompanyRequest)">
+            <summary>Create a new company.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.Search(System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Int32,System.Int32)">
+            <summary>Search jobs via Elasticsearch.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.GetJob(System.Guid)">
+            <summary>Get job detail by ID.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.GetJobsByCompany(System.Guid)">
+            <summary>Get all approved jobs for a company.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.CreateJob(JobCatalogService.Models.DTOs.CreateJobRequest)">
+            <summary>Post a new job listing (Recruiter only).</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.UpdateJob(System.Guid,JobCatalogService.Models.DTOs.UpdateJobRequest)">
+            <summary>Update a job listing (Recruiter, own jobs only).</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.DeleteJob(System.Guid)">
+            <summary>Delete (soft) a job listing — Recruiter can only delete own jobs.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.UpdateStatus(System.Guid,JobCatalogService.Models.DTOs.UpdateModerationStatusRequest)">
+            <summary>Update job moderation status (Admin only).</summary>
+        </member>
+        <member name="T:JobCatalogService.Migrations.createinit">
+            <inheritdoc />
+        </member>
+        <member name="M:JobCatalogService.Migrations.createinit.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobCatalogService.Migrations.createinit.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobCatalogService.Migrations.createinit.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:JobCatalogService.Services.RsaKeyProvider">
+            <summary>
+            Lazily fetches and caches the RSA public key from IdentityService.
+            GetKey() is synchronous so it can be used in IssuerSigningKeyResolver.
+            </summary>
+        </member>
+        <member name="M:JobCatalogService.Services.RsaKeyProvider.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{JobCatalogService.Services.RsaKeyProvider})">
+            <summary>
+            Lazily fetches and caches the RSA public key from IdentityService.
+            GetKey() is synchronous so it can be used in IssuerSigningKeyResolver.
+            </summary>
+        </member>
+    </members>
+</doc>

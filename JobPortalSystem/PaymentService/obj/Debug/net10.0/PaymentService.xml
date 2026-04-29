@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PaymentService</name>
+    </assembly>
+    <members>
+        <member name="M:PaymentService.Controllers.PaymentController.GetUnlockStatus(PaymentService.Models.DTOs.UnlockStatusRequest)">
+            <summary>Check unlock status for a list of resource IDs in one call.</summary>
+        </member>
+        <member name="M:PaymentService.Controllers.PaymentController.GetConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>Returns the Razorpay public key ID for the frontend checkout.</summary>
+        </member>
+        <member name="T:PaymentService.Data.Entities.RecruiterUnlock">
+            <summary>
+            Tracks what a recruiter has already paid to unlock.
+            Prevents double-charging for the same resource.
+            </summary>
+        </member>
+        <member name="P:PaymentService.Data.Entities.RecruiterUnlock.ResourceId">
+            <summary>The resource being unlocked — e.g. applicationId or jobSeekerId</summary>
+        </member>
+        <member name="P:PaymentService.Data.Entities.RecruiterUnlock.UnlockType">
+            <summary>"ResumeView" | "ResumePdfDownload" | "ContactUnlock"</summary>
+        </member>
+        <member name="T:PaymentService.Migrations.init">
+            <inheritdoc />
+        </member>
+        <member name="M:PaymentService.Migrations.init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PaymentService.Migrations.init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PaymentService.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:PaymentService.Services.RazorpayService">
+            <summary>
+            Razorpay integration using direct HTTP calls (no SDK dependency issues).
+            </summary>
+        </member>
+        <member name="M:PaymentService.Services.RazorpayService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{PaymentService.Services.RazorpayService})">
+            <summary>
+            Razorpay integration using direct HTTP calls (no SDK dependency issues).
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,14 @@
+{"@t":"2026-04-11T07:04:28.6478856Z","@mt":"Configured endpoint {Endpoint}, Consumer: {ConsumerType}","Endpoint":"grant-resume-access","ConsumerType":"ResumeService.Consumers.GrantResumeAccessConsumer","SourceContext":"MassTransit"}
+{"@t":"2026-04-11T07:04:29.1856007Z","@mt":"User profile is available. Using '{FullName}' as key repository and Windows DPAPI to encrypt keys at rest.","FullName":"C:\\Users\\Karan\\AppData\\Local\\ASP.NET\\DataProtection-Keys","EventId":{"Id":63,"Name":"UsingProfileAsKeyRepositoryWithDPAPI"},"SourceContext":"Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager"}
+{"@t":"2026-04-11T07:04:30.2640701Z","@mt":"Now listening on: {address}","address":"http://localhost:5004","EventId":{"Id":14,"Name":"ListeningOnAddress"},"SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:04:30.5009098Z","@mt":"Application started. Press Ctrl+C to shut down.","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:04:30.5177163Z","@mt":"Hosting environment: {EnvName}","EnvName":"Development","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:04:30.5462877Z","@mt":"Content root path: {ContentRoot}","ContentRoot":"C:\\Users\\Karan\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:04:32.8296059Z","@mt":"Bus started: {HostAddress}","HostAddress":"rabbitmq://localhost/","SourceContext":"MassTransit"}
+{"@t":"2026-04-11T07:20:55.5674447Z","@mt":"Configured endpoint {Endpoint}, Consumer: {ConsumerType}","Endpoint":"grant-resume-access","ConsumerType":"ResumeService.Consumers.GrantResumeAccessConsumer","SourceContext":"MassTransit"}
+{"@t":"2026-04-11T07:20:56.5418563Z","@mt":"User profile is available. Using '{FullName}' as key repository and Windows DPAPI to encrypt keys at rest.","FullName":"C:\\Users\\Karan\\AppData\\Local\\ASP.NET\\DataProtection-Keys","EventId":{"Id":63,"Name":"UsingProfileAsKeyRepositoryWithDPAPI"},"SourceContext":"Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager"}
+{"@t":"2026-04-11T07:20:58.2863499Z","@mt":"Now listening on: {address}","address":"http://localhost:5004","EventId":{"Id":14,"Name":"ListeningOnAddress"},"SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:58.6043632Z","@mt":"Application started. Press Ctrl+C to shut down.","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:58.6059602Z","@mt":"Hosting environment: {EnvName}","EnvName":"Development","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:58.6064753Z","@mt":"Content root path: {ContentRoot}","ContentRoot":"C:\\Users\\Karan\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-04-11T07:20:58.8699705Z","@mt":"Bus started: {HostAddress}","HostAddress":"rabbitmq://localhost/","SourceContext":"MassTransit"}

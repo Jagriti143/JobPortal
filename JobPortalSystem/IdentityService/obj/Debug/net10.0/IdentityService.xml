@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IdentityService</name>
+    </assembly>
+    <members>
+        <member name="T:IdentityService.Controllers.AuthController">
+            <summary>Auth controller — registration, login, token management, profile</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.#ctor(IdentityService.Repositories.Interfaces.IUserRepository,IdentityService.Repositories.Interfaces.IRefreshTokenRepository,IdentityService.Services.ITokenService,IdentityService.Services.IEmailService,IdentityService.Services.IRedisBlocklistService,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{IdentityService.Controllers.AuthController})">
+            <summary>Auth controller — registration, login, token management, profile</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.Register(IdentityService.Models.DTOs.RegisterRequest)">
+            <summary>Register a new JobSeeker or Recruiter account.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.VerifyEmail(System.String)">
+            <summary>Verify email address using token from verification email.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.Login(IdentityService.Models.DTOs.LoginRequest)">
+            <summary>Login with email and password. Returns JWT access token and refresh token.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.RefreshToken(IdentityService.Models.DTOs.RefreshTokenRequest)">
+            <summary>Rotate refresh token. Returns new access token and refresh token.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.Logout">
+            <summary>Logout — revokes session and adds JWT JTI to blocklist.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.ForgotPassword(IdentityService.Models.DTOs.ForgotPasswordRequest)">
+            <summary>Send password reset email.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.ResetPassword(IdentityService.Models.DTOs.ResetPasswordRequest)">
+            <summary>Reset password using token from reset email.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.GetMe">
+            <summary>Get current user profile.</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.UpdateMe(IdentityService.Models.DTOs.UpdateProfileRequest)">
+            <summary>Update current user profile (display name only).</summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.GetPublicKey">
+            <summary>Get RSA public key in PEM format for JWT validation.</summary>
+        </member>
+        <member name="T:IdentityService.Migrations.createinit">
+            <inheritdoc />
+        </member>
+        <member name="M:IdentityService.Migrations.createinit.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:IdentityService.Migrations.createinit.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:IdentityService.Migrations.createinit.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

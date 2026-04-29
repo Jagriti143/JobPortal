@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AdminService</name>
+    </assembly>
+    <members>
+        <member name="M:AdminService.Controllers.AdminJobsController.GetModerationQueue">
+            <summary>Get jobs pending moderation.</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminJobsController.ApproveJob(System.Guid)">
+            <summary>Approve a job listing.</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminJobsController.FlagJob(System.Guid)">
+            <summary>Flag a job listing.</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminReportsController.GetAuditLogs(System.Nullable{System.Guid},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>Get paginated audit logs.</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminReportsController.GetTransactions(System.Int32,System.Int32)">
+            <summary>Get all platform transactions.</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminReportsController.GetRevenue(System.String)">
+            <summary>Get revenue report grouped by time period.</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminUsersController.GetUsers(System.String,System.String,System.Int32,System.Int32)">
+            <summary>List all users (paginated).</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminUsersController.UpdateRole(System.Guid,AdminService.Controllers.UpdateRoleRequest)">
+            <summary>Update user role.</summary>
+        </member>
+        <member name="M:AdminService.Controllers.AdminUsersController.DeleteUser(System.Guid)">
+            <summary>Soft-delete a user.</summary>
+        </member>
+        <member name="T:AdminService.Migrations.init">
+            <inheritdoc />
+        </member>
+        <member name="M:AdminService.Migrations.init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AdminService.Migrations.init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AdminService.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
