@@ -4,6 +4,16 @@
         <name>ResumeService</name>
     </assembly>
     <members>
+        <member name="M:ResumeService.Controllers.ResumesController.ParseDate(System.String)">
+            <summary>
+            Safely parse a date string from the Angular month-picker (“YYYY-MM” or “YYYY-MM-DD”)
+            into a nullable DateTime. Returns null for null/empty input so optional dates don’t
+            cause 400 Bad Request when the user leaves the field blank.
+            </summary>
+        </member>
+        <member name="M:ResumeService.Controllers.ResumesController.DeleteResume(System.Guid)">
+            <summary>Permanently delete a resume. Only the owning JobSeeker may do this.</summary>
+        </member>
         <member name="T:ResumeService.Migrations.createinit">
             <inheritdoc />
         </member>
@@ -15,6 +25,12 @@
         </member>
         <member name="M:ResumeService.Migrations.createinit.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="P:ResumeService.Models.DTOs.EducationDto.StartDate">
+            <summary>YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.</summary>
+        </member>
+        <member name="P:ResumeService.Models.DTOs.ExperienceDto.StartDate">
+            <summary>YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.</summary>
         </member>
     </members>
 </doc>

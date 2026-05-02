@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap, switchMap, map, of, catchError } from 'rxjs';
 import { Router } from '@angular/router';
-import { ApiResponse, AuthResponse, LoginRequest, RegisterRequest, UserProfile } from '../models/index';
+import { ApiResponse, AuthResponse, Company, LoginRequest, RegisterRequest, UserProfile } from '../models/index';
 import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -10,6 +10,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private base = `${environment.apiUrl}/auth`;
+  private companiesBase = `${environment.apiUrl}/companies`;
 
   private _user$ = new BehaviorSubject<UserProfile | null>(this.loadUser());
   user$ = this._user$.asObservable();
@@ -18,6 +19,11 @@ export class AuthService {
   get isLoggedIn() { return !!this.getToken(); }
   get role() { return this._user$.value?.role ?? ''; }
 
+  /**
+   * Login — authenticate, store tokens, fetch and emit user profile.
+   * Company data is already persisted in SQL Server from registration;
+   * no sessionStorage processing is needed here.
+   */
   login(req: LoginRequest): Observable<ApiResponse<AuthResponse>> {
     return this.http.post<ApiResponse<AuthResponse>>(`${this.base}/login`, req).pipe(
       switchMap(res => {
@@ -43,12 +49,30 @@ export class AuthService {
     );
   }
 
+  /**
+   * Register a new account.
+   *
+   * For Recruiter accounts: company fields (companyName, companyIndustry, etc.)
+   * are sent directly in the request body. The backend creates the company
+   * atomically during registration — no sessionStorage deferral.
+   */
   register(req: RegisterRequest): Observable<ApiResponse<{ userId: string }>> {
-    return this.http.post<ApiResponse<{ userId: string }>>(`${this.base}/register`, req);
+    if (req.role === 'Recruiter') {
+      // Send all fields (including company) directly to the backend
+      return this.http.post<ApiResponse<{ userId: string }>>(`${this.base}/register`, req);
+    }
+    // JobSeeker — only auth fields needed
+    const authPayload = { email: req.email, password: req.password, role: req.role };
+    return this.http.post<ApiResponse<{ userId: string }>>(`${this.base}/register`, authPayload);
+  }
+
+  /** Link a company to the currently authenticated recruiter (one-time, legacy support). */
+  linkCompany(companyId: string): Observable<ApiResponse<any>> {
+    return this.http.put<ApiResponse<any>>(`${this.base}/me/company`, { companyId });
   }
 
   fetchProfile(): void {
-    if(!this.isLoggedIn) return;
+    if (!this.isLoggedIn) return;
     this.http.get<ApiResponse<UserProfile>>(`${this.base}/me`).subscribe({
       next: res => {
         if (res.success && res.data) {
@@ -62,7 +86,7 @@ export class AuthService {
   }
 
   logout(): void {
-    if(this.isLoggedIn) this.http.post(`${this.base}/logout`, {}).subscribe();
+    if (this.isLoggedIn) this.http.post(`${this.base}/logout`, {}).subscribe();
     if (typeof localStorage !== 'undefined') {
       ['access_token', 'refresh_token', 'user_profile'].forEach(k => localStorage.removeItem(k));
     }
@@ -89,9 +113,9 @@ export class AuthService {
     );
   }
 
-  private loadUser(): UserProfile | null { 
+  private loadUser(): UserProfile | null {
     if (typeof localStorage === 'undefined') return null;
-    const r = localStorage.getItem('user_profile'); 
-    return r ? JSON.parse(r) : null; 
+    const r = localStorage.getItem('user_profile');
+    return r ? JSON.parse(r) : null;
   }
 }

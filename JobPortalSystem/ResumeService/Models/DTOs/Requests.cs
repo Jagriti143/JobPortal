@@ -17,8 +17,9 @@ public class EducationDto
     public string Institution { get; set; } = string.Empty;
     public string Degree { get; set; } = string.Empty;
     public string? FieldOfStudy { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
+    /// <summary>YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.</summary>
+    public string? StartDate { get; set; }
+    public string? EndDate { get; set; }
 }
 
 public class ExperienceDto
@@ -26,8 +27,9 @@ public class ExperienceDto
     public string Company { get; set; } = string.Empty;
     public string JobTitle { get; set; } = string.Empty;
     public string? Description { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
+    /// <summary>YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.</summary>
+    public string? StartDate { get; set; }
+    public string? EndDate { get; set; }
     public bool IsCurrentRole { get; set; }
 }
 

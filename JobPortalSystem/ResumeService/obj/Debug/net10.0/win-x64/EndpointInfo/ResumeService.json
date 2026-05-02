@@ -1,0 +1,397 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ResumeService API",
+    "version": "v1"
+  },
+  "paths": {
+    "/resumes/templates": {
+      "get": {
+        "tags": [
+          "Resumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes/my": {
+      "get": {
+        "tags": [
+          "Resumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes/{resumeId}": {
+      "get": {
+        "tags": [
+          "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resumes"
+        ],
+        "summary": "Permanently delete a resume. Only the owning JobSeeker may do this.",
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes": {
+      "post": {
+        "tags": [
+          "Resumes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes/{resumeId}/pdf": {
+      "get": {
+        "tags": [
+          "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes/{resumeId}/unlock": {
+      "post": {
+        "tags": [
+          "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes/unlock-status/{unlockRequestId}": {
+      "get": {
+        "tags": [
+          "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "unlockRequestId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes/{resumeId}/view": {
+      "get": {
+        "tags": [
+          "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateResumeRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "templateId": {
+            "type": "string",
+            "nullable": true
+          },
+          "certifications": {
+            "type": "string",
+            "nullable": true
+          },
+          "educations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EducationDto"
+            },
+            "nullable": true
+          },
+          "experiences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperienceDto"
+            },
+            "nullable": true
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillDto"
+            },
+            "nullable": true
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EducationDto": {
+        "type": "object",
+        "properties": {
+          "institution": {
+            "type": "string",
+            "nullable": true
+          },
+          "degree": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldOfStudy": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "description": "YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExperienceDto": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "description": "YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCurrentRole": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SkillDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "level": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme. Enter 'Bearer {token}'",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

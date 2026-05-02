@@ -51,15 +51,40 @@ import { ResumeService } from '../../../core/services/resume.service';
         </a>
 
         <!-- Resume cards -->
-        <div *ngFor="let resume of resumes" class="resume-card">
+        <div *ngFor="let resume of resumes" class="resume-card" [class.confirming-delete]="confirmingDeleteId === resume.id">
           <div class="resume-card-top">
             <div class="resume-icon">
               <mat-icon>description</mat-icon>
             </div>
-            <button mat-icon-button class="more-btn" [matMenuTriggerFor]="resumeMenu"
-              [matMenuTriggerData]="{resume: resume}" (click)="$event.stopPropagation()">
-              <mat-icon>more_vert</mat-icon>
-            </button>
+            <div class="card-top-actions">
+              <button mat-icon-button class="delete-btn"
+                title="Delete resume"
+                (click)="$event.stopPropagation(); requestDelete(resume)">
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+              <button mat-icon-button class="more-btn" [matMenuTriggerFor]="resumeMenu"
+                [matMenuTriggerData]="{resume: resume}" (click)="$event.stopPropagation()">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- Inline delete confirmation banner -->
+          <div class="delete-confirm-banner" *ngIf="confirmingDeleteId === resume.id">
+            <mat-icon>warning_amber</mat-icon>
+            <span>Permanently delete <strong>{{ resume.title }}</strong>?</span>
+            <div class="confirm-actions">
+              <button mat-stroked-button class="cancel-del-btn" (click)="cancelDelete()">
+                Cancel
+              </button>
+              <button mat-raised-button class="confirm-del-btn"
+                [disabled]="resume._deleting"
+                (click)="confirmDelete(resume)">
+                <mat-spinner diameter="14" *ngIf="resume._deleting"></mat-spinner>
+                <mat-icon *ngIf="!resume._deleting">delete_forever</mat-icon>
+                {{ resume._deleting ? 'Deleting...' : 'Yes, Delete' }}
+              </button>
+            </div>
           </div>
 
           <h3 class="resume-title">{{ resume.title }}</h3>
@@ -110,6 +135,9 @@ import { ResumeService } from '../../../core/services/resume.service';
           </a>
           <button mat-menu-item (click)="downloadPdf(resume)">
             <mat-icon>download</mat-icon> Download PDF
+          </button>
+          <button mat-menu-item class="delete-menu-item" (click)="requestDelete(resume)">
+            <mat-icon>delete_outline</mat-icon> Delete Resume
           </button>
         </ng-template>
       </mat-menu>
@@ -186,6 +214,35 @@ import { ResumeService } from '../../../core/services/resume.service';
     .empty-state h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
     .empty-state p { color: #6b7280; margin-bottom: 24px; }
 
+    /* Card top actions */
+    .card-top-actions { display: flex; align-items: center; gap: 4px; }
+    .delete-btn { color: #ef4444 !important; opacity: 0.55; transition: opacity .15s; }
+    .delete-btn:hover { opacity: 1; }
+    .more-btn { color: #9ca3af; }
+
+    /* Delete confirm banner */
+    .delete-confirm-banner {
+      display: flex; align-items: flex-start; flex-wrap: wrap; gap: 10px;
+      background: #fef2f2; border: 1.5px solid #fca5a5; border-radius: 10px;
+      padding: 12px 14px; animation: fadeIn .2s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+    .delete-confirm-banner mat-icon { color: #ef4444; font-size:20px; width:20px; height:20px; flex-shrink:0; margin-top:1px; }
+    .delete-confirm-banner span { flex: 1; font-size: .83rem; color: #7f1d1d; line-height: 1.4; }
+    .confirm-actions { display: flex; gap: 8px; width: 100%; justify-content: flex-end; margin-top: 4px; }
+    .cancel-del-btn { font-size: .78rem !important; height: 30px !important; }
+    .confirm-del-btn {
+      font-size: .78rem !important; height: 30px !important;
+      background: #ef4444 !important; color: white !important;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .confirm-del-btn mat-icon { font-size:15px; width:15px; height:15px; }
+    .confirming-delete { border-color: #fca5a5 !important; }
+
+    /* Delete menu item */
+    .delete-menu-item { color: #ef4444 !important; }
+    .delete-menu-item mat-icon { color: #ef4444 !important; }
+
     .text-muted { color: #6b7280; }
     .text-sm { font-size: 0.8rem; }
 
@@ -197,10 +254,11 @@ import { ResumeService } from '../../../core/services/resume.service';
 })
 export class SeekerResumesComponent implements OnInit {
   private resumeService = inject(ResumeService);
-  private snack = inject(MatSnackBar);
+  private snack         = inject(MatSnackBar);
 
   resumes: any[] = [];
   loading = false;
+  confirmingDeleteId: string | null = null;
 
   ngOnInit(): void {
     this.loading = true;
@@ -212,6 +270,30 @@ export class SeekerResumesComponent implements OnInit {
       error: err => {
         this.loading = false;
         this.snack.open(err.error?.message ?? 'Failed to load resumes', 'Close', { duration: 4000 });
+      }
+    });
+  }
+
+  requestDelete(resume: any): void {
+    this.confirmingDeleteId = resume.id;
+  }
+
+  cancelDelete(): void {
+    this.confirmingDeleteId = null;
+  }
+
+  confirmDelete(resume: any): void {
+    resume._deleting = true;
+    this.resumeService.deleteResume(resume.id).subscribe({
+      next: () => {
+        // Remove from list immediately (204 No Content)
+        this.resumes = this.resumes.filter(r => r.id !== resume.id);
+        this.confirmingDeleteId = null;
+        this.snack.open(`"${resume.title}" deleted.`, 'OK', { duration: 3500 });
+      },
+      error: err => {
+        resume._deleting = false;
+        this.snack.open(err.error?.message ?? 'Failed to delete resume.', 'Close', { duration: 4000 });
       }
     });
   }

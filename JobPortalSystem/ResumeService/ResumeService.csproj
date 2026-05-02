@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -11,7 +12,6 @@
   <ItemGroup>
     <PackageReference Include="MassTransit" Version="9.1.0" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="9.1.0" />
-    <PackageReference Include="Ocelot" Version="24.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="2.0.0" />
@@ -19,8 +19,25 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
-    <PackageReference Include="QuestPDF" Version="2024.10.4" />
+    <PackageReference Include="QuestPDF" Version="2025.4.0" />
+    <!-- SkiaSharp.NativeAssets.Win32 removed: QuestPDF 2025.x bundles its own Skia native DLLs -->
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
   </ItemGroup>
+
+  <!--
+    QuestPDF 2025.x bundles all native dependencies inside its own package under runtimes/win-x64/native/.
+    Its .targets file only copies the LatoFont folder, NOT the native DLLs.
+    Because this project targets net10.0 (not listed in QuestPDF's supported TFMs), runtime asset
+    resolution is also skipped. We use a BeforeBuild target to copy all 5 native DLLs explicitly.
+    Note: $(TargetDir) always resolves to the actual output directory including the RID suffix.
+  -->
+  <Target Name="CopyQuestPdfNativeAssets" BeforeTargets="Build">
+    <ItemGroup>
+      <QuestPdfNative Include="$(USERPROFILE)\.nuget\packages\questpdf\2025.4.0\runtimes\win-x64\native\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(QuestPdfNative)"
+          DestinationFolder="$(TargetDir)"
+          SkipUnchangedFiles="true" />
+  </Target>
 
 </Project>

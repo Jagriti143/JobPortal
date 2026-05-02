@@ -10,7 +10,7 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Get company profile.",
+        "summary": "Get company profile by ID.",
         "parameters": [
           {
             "name": "companyId",
@@ -22,6 +22,49 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/companies/my": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get the company associated with the currently logged-in recruiter.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Update the company owned by the currently logged-in recruiter.\r\nOnly non-null fields in the request body are applied; others are left unchanged.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -99,7 +142,7 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Create a new company.",
+        "summary": "Create a company profile (Recruiter only, called once during registration flow).\r\nA recruiter may only own one company — subsequent calls return 409 Conflict.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -115,6 +158,38 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateCompanyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/companies/internal": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Internal endpoint called ONLY by IdentityService during recruiter registration.\r\nProtected by X-Service-Key header — NOT JWT Bearer.\r\nCreates a Company record with the supplied RecruiterId and returns the companyId.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyInternalRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyInternalRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyInternalRequest"
               }
             }
           }
@@ -329,7 +404,7 @@
         "tags": [
           "Jobs"
         ],
-        "summary": "Get all approved jobs for a company.",
+        "summary": "Get all approved jobs for a company (public).",
         "parameters": [
           {
             "name": "companyId",
@@ -341,6 +416,19 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/jobs/my": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Get all jobs posted by the currently authenticated recruiter (all statuses).\r\nUsed exclusively by the recruiter dashboard — no companyId required from client.",
         "responses": {
           "200": {
             "description": "OK"
@@ -385,7 +473,7 @@
         "tags": [
           "Jobs"
         ],
-        "summary": "Update job moderation status (Admin only).",
+        "summary": "Update job moderation status — called by AdminService after approve/flag.\r\nProtected by X-Service-Key header (internal service-to-service auth).",
         "parameters": [
           {
             "name": "jobId",
@@ -416,6 +504,19 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/jobs/admin/resync": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Force a full Elasticsearch re-sync of all approved jobs (Admin only).",
         "responses": {
           "200": {
             "description": "OK"
@@ -466,6 +567,41 @@
         },
         "additionalProperties": false
       },
+      "CreateCompanyInternalRequest": {
+        "type": "object",
+        "properties": {
+          "recruiterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "industry": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO for the internal POST /companies/internal endpoint.\r\nCalled only by IdentityService during recruiter registration.\r\nRecruiterId is passed directly (not extracted from JWT)."
+      },
       "CreateCompanyRequest": {
         "type": "object",
         "properties": {
@@ -499,10 +635,6 @@
       "CreateJobRequest": {
         "type": "object",
         "properties": {
-          "companyId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
             "type": "string",
             "nullable": true
@@ -1160,6 +1292,37 @@
           }
         },
         "additionalProperties": false
+      },
+      "UpdateCompanyRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "industry": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO for PUT /companies/my — recruiter updates their own company details.\r\nAll fields are optional; only non-null values will overwrite existing data."
       },
       "UpdateJobRequest": {
         "type": "object",

@@ -22,11 +22,20 @@ export class JobService {
 
   getJob(id: string) { return this.http.get<ApiResponse<Job>>(`${this.base}/${id}`); }
   getJobsByCompany(companyId: string) { return this.http.get<ApiResponse<Job[]>>(`${this.base}/company/${companyId}`); }
+  /** Fetch all jobs posted by the currently authenticated recruiter (all moderation statuses). */
+  getMyJobs() { return this.http.get<ApiResponse<Job[]>>(`${this.base}/my`); }
   createJob(req: any) { return this.http.post<ApiResponse<any>>(this.base, req); }
   updateJob(id: string, req: any) { return this.http.put<ApiResponse<any>>(`${this.base}/${id}`, req); }
   deleteJob(id: string) { return this.http.delete<ApiResponse<any>>(`${this.base}/${id}`); }
 
   // Companies
-  createCompany(req: any) { return this.http.post<ApiResponse<Company>>(`${environment.apiUrl}/companies`, req); }
+  /** Fetch the company linked to the currently authenticated recruiter. */
+  getMyCompany() { return this.http.get<ApiResponse<Company>>(`${environment.apiUrl}/companies/my`); }
   getCompany(id: string) { return this.http.get<ApiResponse<Company>>(`${environment.apiUrl}/companies/${id}`); }
+  /** Create a company — called only once during the recruiter registration flow. */
+  createCompany(req: any) { return this.http.post<ApiResponse<Company>>(`${environment.apiUrl}/companies`, req); }
+  /** Update the company linked to the authenticated recruiter (PUT /companies/my). */
+  updateMyCompany(req: { name?: string; description?: string; website?: string; logoUrl?: string; industry?: string; location?: string }) {
+    return this.http.put<ApiResponse<Company>>(`${environment.apiUrl}/companies/my`, req);
+  }
 }

@@ -3,6 +3,7 @@ namespace JobCatalogService.Data.Entities;
 public class Company
 {
     public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid RecruiterId { get; set; } // The recruiter who registered this company
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public string? Website { get; set; }

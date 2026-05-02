@@ -48,10 +48,16 @@ namespace JobCatalogService.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<Guid>("RecruiterId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RecruiterId")
+                        .IsUnique();
 
                     b.ToTable("Companies");
                 });

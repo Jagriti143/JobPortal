@@ -18,6 +18,7 @@ public class IdentityDbContext(DbContextOptions<IdentityDbContext> options) : Db
             e.Property(u => u.PasswordHash).HasMaxLength(512).IsRequired();
             e.Property(u => u.Role).HasMaxLength(50).IsRequired();
             e.Property(u => u.DisplayName).HasMaxLength(200);
+            e.Property(u => u.CompanyId); // nullable Guid — set once for Recruiters
             e.HasQueryFilter(u => !u.IsDeleted);
         });
 

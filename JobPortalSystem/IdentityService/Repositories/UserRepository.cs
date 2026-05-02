@@ -51,4 +51,14 @@ public class UserRepository(IdentityDbContext db) : IUserRepository
         db.Users.Update(user);
         return db.SaveChangesAsync();
     }
+
+    public async Task DeleteUserAsync(Guid userId)
+    {
+        var user = await db.Users.IgnoreQueryFilters().FirstOrDefaultAsync(u => u.Id == userId);
+        if (user != null)
+        {
+            db.Users.Remove(user);
+            await db.SaveChangesAsync();
+        }
+    }
 }

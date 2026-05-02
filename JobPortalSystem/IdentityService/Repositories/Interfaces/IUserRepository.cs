@@ -12,4 +12,6 @@ public interface IUserRepository
     Task<User?> GetByPasswordResetTokenAsync(string token);
     Task<User?> GetByIdAsync(Guid userId);
     Task UpdateAsync(User user);
+    /// <summary>Hard-deletes a user by ID — used for rollback on failed atomic registration.</summary>
+    Task DeleteUserAsync(Guid userId);
 }

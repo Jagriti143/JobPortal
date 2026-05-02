@@ -75,6 +75,58 @@ import { AuthService } from '../../../core/services/auth.service';
               <span class="error-msg" *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">Password is required</span>
               <span class="error-msg" *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched">Minimum 6 characters required</span>
             </div>
+
+            <!-- Company Details — shown only when Recruiter is selected -->
+            <div *ngIf="selectedRole() === 'Recruiter'" class="company-section">
+              <div class="company-section-header">
+                <mat-icon>business</mat-icon>
+                <span>Company Details</span>
+              </div>
+              <p class="company-section-hint">These details will be permanently linked to your recruiter account and cannot be changed later.</p>
+
+              <div class="field-group">
+                <label class="field-label">Company Name <span class="required-star">*</span></label>
+                <div class="field-wrap" [class.field-error]="form.get('companyName')?.invalid && form.get('companyName')?.touched">
+                  <mat-icon class="field-icon">apartment</mat-icon>
+                  <input type="text" placeholder="e.g. Acme Corp" formControlName="companyName" class="field-input">
+                </div>
+                <span class="error-msg" *ngIf="form.get('companyName')?.hasError('required') && form.get('companyName')?.touched">Company name is required</span>
+              </div>
+
+              <div class="two-col-fields">
+                <div class="field-group">
+                  <label class="field-label">Industry</label>
+                  <div class="field-wrap">
+                    <mat-icon class="field-icon">category</mat-icon>
+                    <input type="text" placeholder="e.g. Technology" formControlName="companyIndustry" class="field-input">
+                  </div>
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Location</label>
+                  <div class="field-wrap">
+                    <mat-icon class="field-icon">location_on</mat-icon>
+                    <input type="text" placeholder="e.g. Bangalore" formControlName="companyLocation" class="field-input">
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label">Website</label>
+                <div class="field-wrap">
+                  <mat-icon class="field-icon">language</mat-icon>
+                  <input type="url" placeholder="https://..." formControlName="companyWebsite" class="field-input">
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label">Company Description</label>
+                <div class="field-wrap field-wrap-textarea">
+                  <mat-icon class="field-icon field-icon-top">description</mat-icon>
+                  <textarea placeholder="Brief description of your company..." formControlName="companyDescription" class="field-input field-textarea" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+
             <p class="terms-text">By creating an account, you agree to our <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>.</p>
             <button type="submit" class="submit-btn" [disabled]="loading || form.invalid">
               <mat-spinner diameter="18" *ngIf="loading"></mat-spinner>
@@ -107,8 +159,8 @@ import { AuthService } from '../../../core/services/auth.service';
     .trust-label { font-size:.75rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px }
     .trust-logos { display:flex;gap:10px;flex-wrap:wrap }
     .trust-logo { background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);padding:5px 12px;border-radius:8px;font-size:.78rem;font-weight:600 }
-    .auth-right { width:540px;background:#fafaf8;display:flex;align-items:center;justify-content:center;padding:40px 32px }
-    .auth-form-wrap { width:100%;max-width:440px }
+    .auth-right { width:580px;background:#fafaf8;display:flex;align-items:flex-start;justify-content:center;padding:40px 32px;overflow-y:auto }
+    .auth-form-wrap { width:100%;max-width:480px }
     .form-header { margin-bottom:28px }
     .form-header h2 { font-size:1.75rem;font-weight:400;color:#1a2e12;margin-bottom:6px;font-family:'DM Serif Display',serif }
     .form-header p { color:#64748b;font-size:.9rem }
@@ -125,17 +177,28 @@ import { AuthService } from '../../../core/services/auth.service';
     .role-btn-title { font-size:.9rem;font-weight:700;color:#1a2e12 }
     .role-btn-desc { font-size:.78rem;color:#64748b;margin-top:1px }
     .role-check { font-size:20px;width:20px;height:20px;color:#6b8660 }
-    .field-group { margin-bottom:18px }
+    .field-group { margin-bottom:16px }
     .field-label { display:block;font-size:.8rem;font-weight:600;color:#3d5a30;margin-bottom:6px }
+    .required-star { color:#dc2626 }
     .field-wrap { display:flex;align-items:center;border:1.5px solid #e8ede4;border-radius:10px;background:#f0f7ec;transition:all .2s;overflow:hidden }
+    .field-wrap-textarea { align-items:flex-start }
     .field-wrap:focus-within { border-color:#6b8660;background:#fff;box-shadow:0 0 0 3px rgba(107,134,96,.1) }
     .field-wrap.field-error { border-color:#dc2626 }
     .field-icon { font-size:18px;width:18px;height:18px;color:#8a9e80;padding:0 12px;flex-shrink:0 }
+    .field-icon-top { margin-top:14px }
     .field-input { flex:1;border:none;outline:none;background:transparent;font-size:.9rem;color:#1a2e12;padding:13px 12px 13px 0;font-family:'Inter',sans-serif }
+    .field-textarea { resize:vertical;padding:13px 12px 13px 0;min-height:80px }
     .field-input::placeholder { color:#94a3b8 }
     .pwd-toggle { background:none;border:none;cursor:pointer;padding:0 12px;color:#8a9e80;display:flex;align-items:center }
     .pwd-toggle mat-icon { font-size:18px;width:18px;height:18px }
     .error-msg { display:block;font-size:.75rem;color:#dc2626;margin-top:4px }
+    .company-section { background:#f0f7ec;border:1.5px solid #c5d8bc;border-radius:14px;padding:20px;margin-bottom:20px;animation:slideDown .25s ease }
+    @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+    .company-section-header { display:flex;align-items:center;gap:8px;margin-bottom:6px }
+    .company-section-header mat-icon { color:#2d4a22;font-size:20px;width:20px;height:20px }
+    .company-section-header span { font-weight:700;font-size:.95rem;color:#1a2e12 }
+    .company-section-hint { font-size:.78rem;color:#64748b;margin-bottom:16px;line-height:1.5;padding:8px 10px;background:rgba(255,165,0,.08);border-left:3px solid #f59e0b;border-radius:0 6px 6px 0 }
+    .two-col-fields { display:grid;grid-template-columns:1fr 1fr;gap:12px }
     .terms-text { font-size:.78rem;color:#94a3b8;margin-bottom:16px;line-height:1.5 }
     .terms-link { color:#6b8660;text-decoration:none }
     .terms-link:hover { text-decoration:underline }
@@ -147,7 +210,7 @@ import { AuthService } from '../../../core/services/auth.service';
     .auth-switch-link { color:#2d4a22;font-weight:700;text-decoration:none }
     .auth-switch-link:hover { text-decoration:underline }
     @media(max-width:900px){ .auth-left{display:none} .auth-right{width:100%} }
-    @media(max-width:480px){ .auth-right{padding:24px 16px} }
+    @media(max-width:480px){ .auth-right{padding:24px 16px} .two-col-fields{grid-template-columns:1fr} }
   `]
 })
 export class RegisterComponent {
@@ -157,15 +220,65 @@ export class RegisterComponent {
   private snack = inject(MatSnackBar);
   loading = false; showPwd = false;
   selectedRole = signal<'JobSeeker' | 'Recruiter'>('JobSeeker');
-  form = this.fb.group({ email: ['', [Validators.required, Validators.email]], password: ['', [Validators.required, Validators.minLength(6)]], role: ['JobSeeker', Validators.required] });
+
+  form = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    role: ['JobSeeker', Validators.required],
+    // Company fields (Recruiter only)
+    companyName: [''],
+    companyIndustry: [''],
+    companyLocation: [''],
+    companyWebsite: [''],
+    companyDescription: ['']
+  });
+
   stats = [{ value: '50K+', label: 'Professionals' },{ value: '10K+', label: 'Live Jobs' },{ value: '500+', label: 'Companies' },{ value: '95%', label: 'Placed' }];
   companies = ['Google', 'Stripe', 'Zomato', 'Swiggy'];
-  selectRole(role: 'JobSeeker' | 'Recruiter') { this.selectedRole.set(role); this.form.patchValue({ role }); }
+
+  selectRole(role: 'JobSeeker' | 'Recruiter') {
+    this.selectedRole.set(role);
+    this.form.patchValue({ role });
+
+    // Dynamically apply/remove required validator on companyName
+    const companyNameCtrl = this.form.get('companyName');
+    if (role === 'Recruiter') {
+      companyNameCtrl?.setValidators([Validators.required]);
+    } else {
+      companyNameCtrl?.clearValidators();
+    }
+    companyNameCtrl?.updateValueAndValidity();
+  }
+
   submit() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     this.loading = true;
-    this.auth.register(this.form.value as any).subscribe({
-      next: res => { this.loading = false; if (res.success) { this.snack.open('Account created! Please verify your email.', 'OK', { duration: 4000 }); this.router.navigate(['/auth/verify-email']); } },
+
+    const payload: any = {
+      email: this.form.value.email,
+      password: this.form.value.password,
+      role: this.form.value.role
+    };
+
+    if (this.selectedRole() === 'Recruiter') {
+      payload.companyName = this.form.value.companyName;
+      payload.companyIndustry = this.form.value.companyIndustry || undefined;
+      payload.companyLocation = this.form.value.companyLocation || undefined;
+      payload.companyWebsite = this.form.value.companyWebsite || undefined;
+      payload.companyDescription = this.form.value.companyDescription || undefined;
+    }
+
+    this.auth.register(payload).subscribe({
+      next: res => {
+        this.loading = false;
+        if (res.success) {
+          const msg = this.selectedRole() === 'Recruiter'
+            ? 'Account & company created! Please verify your email to activate your recruiter account.'
+            : 'Account created! Please verify your email.';
+          this.snack.open(msg, 'OK', { duration: 6000 });
+          this.router.navigate(['/auth/verify-email']);
+        }
+      },
       error: err => { this.loading = false; this.snack.open(err.error?.message ?? 'Registration failed', 'Close', { duration: 4000 }); }
     });
   }

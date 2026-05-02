@@ -9,4 +9,5 @@ public interface IResumeRepository
     Task AddResumeAsync(Resume resume);
     Task RemoveDetailsAsync(Resume resume);
     Task SaveChangesAsync();
+    Task<bool> DeleteResumeAsync(Guid resumeId, Guid ownerId);
 }

@@ -14,8 +14,18 @@ public class JobRepository(JobDbContext db) : IJobRepository
 
     public Task<List<Job>> GetJobsByCompanyAsync(Guid companyId)
     {
+        // Public endpoint — only approved, non-deleted jobs visible to job seekers
         return db.Jobs
             .Where(j => j.CompanyId == companyId && j.ModerationStatus == "Approved" && !j.IsDeleted)
+            .ToListAsync();
+    }
+
+    public Task<List<Job>> GetJobsByRecruiterAsync(Guid recruiterId)
+    {
+        // Recruiter dashboard — all own jobs regardless of moderation status (excludes soft-deleted)
+        return db.Jobs
+            .Where(j => j.PostedByRecruiterId == recruiterId && !j.IsDeleted)
+            .OrderByDescending(j => j.CreatedAt)
             .ToListAsync();
     }
 

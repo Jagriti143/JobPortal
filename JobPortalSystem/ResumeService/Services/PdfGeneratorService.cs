@@ -14,7 +14,7 @@ public class PdfGeneratorService : IPdfGeneratorService
 {
     public byte[] GeneratePdf(Resume resume)
     {
-        QuestPDF.Settings.License = LicenseType.Community;
+        // License is set once at startup in Program.cs — do NOT set it here.
 
         var doc = Document.Create(container =>
         {

@@ -30,21 +30,23 @@ public class ResumeResponseDto
             Certifications = resume.Certifications,
             CreatedAt = resume.CreatedAt,
             UpdatedAt = resume.UpdatedAt,
+            // Convert DateTime → "YYYY-MM-DD" string so the Angular <input type="month">
+            // picker can parse it back via the toMonth() helper (takes first 7 chars).
             Educations = resume.Educations.Select(e => new EducationDto
             {
                 Institution = e.Institution,
                 Degree = e.Degree,
                 FieldOfStudy = e.FieldOfStudy,
-                StartDate = e.StartDate,
-                EndDate = e.EndDate
+                StartDate = e.StartDate.ToString("yyyy-MM-dd"),
+                EndDate = e.EndDate?.ToString("yyyy-MM-dd")
             }).ToList(),
             Experiences = resume.Experiences.Select(e => new ExperienceDto
             {
                 Company = e.Company,
                 JobTitle = e.JobTitle,
                 Description = e.Description,
-                StartDate = e.StartDate,
-                EndDate = e.EndDate,
+                StartDate = e.StartDate.ToString("yyyy-MM-dd"),
+                EndDate = e.EndDate?.ToString("yyyy-MM-dd"),
                 IsCurrentRole = e.IsCurrentRole
             }).ToList(),
             Skills = resume.Skills.Select(s => new SkillDto

@@ -59,6 +59,22 @@
   },
   {
     "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "GetMyResume",
+    "RelativePath": "resumes/{resumeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resumeId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
     "Method": "UpdateResume",
     "RelativePath": "resumes/{resumeId}",
     "HttpMethod": "PUT",
@@ -73,6 +89,22 @@
       {
         "Name": "req",
         "Type": "ResumeService.Models.DTOs.CreateResumeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ResumeService.Controllers.ResumesController",
+    "Method": "DeleteResume",
+    "RelativePath": "resumes/{resumeId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resumeId",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],

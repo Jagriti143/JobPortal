@@ -9,7 +9,13 @@ public class ResumeRepository(ResumeDbContext db) : IResumeRepository
 {
     public Task<List<Resume>> GetResumesByOwnerAsync(Guid ownerId)
     {
-        return db.Resumes.Where(r => r.OwnerId == ownerId).ToListAsync();
+        return db.Resumes
+            .Include(r => r.Educations)
+            .Include(r => r.Experiences)
+            .Include(r => r.Skills)
+            .Include(r => r.Projects)
+            .Where(r => r.OwnerId == ownerId)
+            .ToListAsync();
     }
 
     public Task<Resume?> GetResumeWithDetailsAsync(Guid resumeId)
@@ -41,5 +47,24 @@ public class ResumeRepository(ResumeDbContext db) : IResumeRepository
     public Task SaveChangesAsync()
     {
         return db.SaveChangesAsync();
+    }
+
+    public async Task<bool> DeleteResumeAsync(Guid resumeId, Guid ownerId)
+    {
+        // Verify ownership without loading children
+        var resume = await db.Resumes.AsNoTracking()
+            .FirstOrDefaultAsync(r => r.Id == resumeId);
+
+        if (resume == null || resume.OwnerId != ownerId)
+            return false;
+
+        // Cascade-delete children first, then the resume itself
+        await db.Educations.Where(e => e.ResumeId == resumeId).ExecuteDeleteAsync();
+        await db.Experiences.Where(e => e.ResumeId == resumeId).ExecuteDeleteAsync();
+        await db.Skills.Where(e => e.ResumeId == resumeId).ExecuteDeleteAsync();
+        await db.Projects.Where(e => e.ResumeId == resumeId).ExecuteDeleteAsync();
+        await db.Resumes.Where(r => r.Id == resumeId).ExecuteDeleteAsync();
+
+        return true;
     }
 }

@@ -15,6 +15,7 @@ public class User
     public int FailedLoginAttempts { get; set; }
     public DateTime? LockoutEnd { get; set; }
     public bool IsDeleted { get; set; }
+    public Guid? CompanyId { get; set; } // Recruiter only — set once during registration
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();

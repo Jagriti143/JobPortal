@@ -15,6 +15,8 @@ public class JobDbContext(DbContextOptions<JobDbContext> options) : DbContext(op
         {
             e.HasKey(c => c.Id);
             e.Property(c => c.Name).HasMaxLength(200).IsRequired();
+            e.Property(c => c.RecruiterId).IsRequired();
+            e.HasIndex(c => c.RecruiterId).IsUnique(); // one company per recruiter
         });
 
         modelBuilder.Entity<CompanyReview>(e =>

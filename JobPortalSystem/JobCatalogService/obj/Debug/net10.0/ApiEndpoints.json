@@ -69,6 +69,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "JobCatalogService.Controllers.CompaniesController",
+    "Method": "CreateCompanyInternal",
+    "RelativePath": "companies/internal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "JobCatalogService.Models.DTOs.CreateCompanyInternalRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.CompaniesController",
+    "Method": "GetMyCompany",
+    "RelativePath": "companies/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.CompaniesController",
+    "Method": "UpdateMyCompany",
+    "RelativePath": "companies/my",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "JobCatalogService.Models.DTOs.UpdateCompanyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Ocelot.Configuration.FileConfigurationController",
     "Method": "Get",
     "RelativePath": "configuration",
@@ -186,6 +228,16 @@
   },
   {
     "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "ResyncElasticsearch",
+    "RelativePath": "jobs/admin/resync",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
     "Method": "GetJobsByCompany",
     "RelativePath": "jobs/company/{companyId}",
     "HttpMethod": "GET",
@@ -198,6 +250,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCatalogService.Controllers.JobsController",
+    "Method": "GetMyJobs",
+    "RelativePath": "jobs/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

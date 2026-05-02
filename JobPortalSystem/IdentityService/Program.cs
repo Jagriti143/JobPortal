@@ -63,6 +63,14 @@ builder.Services.AddSingleton<ITokenService>(sp => sp.GetRequiredService<TokenSe
 builder.Services.AddScoped<IRedisBlocklistService, RedisBlocklistService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+// Named HttpClient for internal service-to-service calls (e.g., JobCatalogService)
+builder.Services.AddHttpClient("JobCatalog", client =>
+{
+    var url = builder.Configuration["InternalServices:JobCatalogUrl"] ?? "http://localhost:5002";
+    client.BaseAddress = new Uri(url);
+    client.Timeout = TimeSpan.FromSeconds(10);
+});
+
 // FluentValidation
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddFluentValidationAutoValidation();

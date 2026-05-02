@@ -3,6 +3,7 @@ using AdminService.Data.Entities;
 using AdminService.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Json;
 using System.Security.Claims;
 
 namespace AdminService.Controllers;
@@ -13,6 +14,8 @@ namespace AdminService.Controllers;
 public class AdminJobsController(
     IJobRepository jobRepository,
     IAuditLogRepository auditLogRepository,
+    IHttpClientFactory httpClientFactory,
+    IConfiguration config,
     ILogger<AdminJobsController> logger) : ControllerBase
 {
     private Guid GetAdminId() => Guid.Parse(
@@ -43,6 +46,9 @@ public class AdminJobsController(
             AdminId = GetAdminId(), Action = "ApproveJob", TargetType = "Job", TargetId = jobId
         });
 
+        // Notify JobCatalogService to index this job in Elasticsearch
+        _ = NotifyJobCatalogServiceAsync(jobId, "Approved");
+
         return Ok(ResponseEnvelope<object>.Ok(new { jobId, status = "Approved" }, traceId: traceId));
     }
 
@@ -63,6 +69,45 @@ public class AdminJobsController(
             AdminId = GetAdminId(), Action = "FlagJob", TargetType = "Job", TargetId = jobId
         });
 
+        // Notify JobCatalogService to remove this job from Elasticsearch
+        _ = NotifyJobCatalogServiceAsync(jobId, "Flagged");
+
         return Ok(ResponseEnvelope<object>.Ok(new { jobId, status = "Flagged" }, traceId: traceId));
+    }
+
+    /// <summary>
+    /// Calls JobCatalogService PATCH /jobs/{id}/status to sync the Elasticsearch index.
+    /// This is fire-and-forget — the admin response is not blocked by this call.
+    /// </summary>
+    private async Task NotifyJobCatalogServiceAsync(Guid jobId, string status)
+    {
+        try
+        {
+            var serviceKey = config["InternalServices:ServiceKey"] ?? string.Empty;
+            var client = httpClientFactory.CreateClient("JobCatalogService");
+
+            // Attach the shared internal service key — JobCatalogService validates this
+            // on the PATCH /jobs/{id}/status endpoint instead of requiring a JWT.
+            using var request = new HttpRequestMessage(
+                HttpMethod.Patch, $"/jobs/{jobId}/status");
+            request.Headers.TryAddWithoutValidation("X-Service-Key", serviceKey);
+            request.Content = JsonContent.Create(new { Status = status });
+
+            var response = await client.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode)
+                logger.LogWarning(
+                    "JobCatalogService ES sync returned {Status} for job {JobId} — body: {Body}",
+                    response.StatusCode, jobId, await response.Content.ReadAsStringAsync());
+            else
+                logger.LogInformation(
+                    "JobCatalogService ES sync succeeded for job {JobId} → {Status}",
+                    jobId, status);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex,
+                "Failed to notify JobCatalogService for ES sync of job {JobId}", ex.Message);
+        }
     }
 }

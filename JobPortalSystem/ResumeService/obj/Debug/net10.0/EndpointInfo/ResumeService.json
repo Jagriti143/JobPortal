@@ -92,10 +92,42 @@
         }
       }
     },
-    "/resumes": {
-      "post": {
+    "/resumes/{resumeId}": {
+      "get": {
         "tags": [
           "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Resumes"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -121,13 +153,12 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/resumes/{resumeId}": {
-      "put": {
+      },
+      "delete": {
         "tags": [
           "Resumes"
         ],
+        "summary": "Permanently delete a resume. Only the owning JobSeeker may do this.",
         "parameters": [
           {
             "name": "resumeId",
@@ -138,6 +169,18 @@
               "format": "uuid"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/resumes": {
+      "post": {
+        "tags": [
+          "Resumes"
         ],
         "requestBody": {
           "content": {
@@ -345,11 +388,11 @@
           },
           "startDate": {
             "type": "string",
-            "format": "date-time"
+            "description": "YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.",
+            "nullable": true
           },
           "endDate": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           }
         },
@@ -372,11 +415,11 @@
           },
           "startDate": {
             "type": "string",
-            "format": "date-time"
+            "description": "YYYY-MM or YYYY-MM-DD string from the frontend month picker. Nullable — blank = unknown.",
+            "nullable": true
           },
           "endDate": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "isCurrentRole": {

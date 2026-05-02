@@ -7,11 +7,21 @@
         <member name="T:IdentityService.Controllers.AuthController">
             <summary>Auth controller — registration, login, token management, profile</summary>
         </member>
-        <member name="M:IdentityService.Controllers.AuthController.#ctor(IdentityService.Repositories.Interfaces.IUserRepository,IdentityService.Repositories.Interfaces.IRefreshTokenRepository,IdentityService.Services.ITokenService,IdentityService.Services.IEmailService,IdentityService.Services.IRedisBlocklistService,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{IdentityService.Controllers.AuthController})">
+        <member name="M:IdentityService.Controllers.AuthController.#ctor(IdentityService.Repositories.Interfaces.IUserRepository,IdentityService.Repositories.Interfaces.IRefreshTokenRepository,IdentityService.Services.ITokenService,IdentityService.Services.IEmailService,IdentityService.Services.IRedisBlocklistService,Microsoft.Extensions.Configuration.IConfiguration,System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Logging.ILogger{IdentityService.Controllers.AuthController})">
             <summary>Auth controller — registration, login, token management, profile</summary>
         </member>
         <member name="M:IdentityService.Controllers.AuthController.Register(IdentityService.Models.DTOs.RegisterRequest)">
-            <summary>Register a new JobSeeker or Recruiter account.</summary>
+            <summary>
+            Register a new JobSeeker or Recruiter account.
+            For Recruiter registrations, CompanyName is required. The company record
+            is created atomically in JobCatalogService before this endpoint returns.
+            </summary>
+        </member>
+        <member name="M:IdentityService.Controllers.AuthController.TryCreateCompanyAsync(System.Guid,IdentityService.Models.DTOs.RegisterRequest,System.String)">
+            <summary>
+            POSTs to JobCatalogService /companies/internal using the shared service key.
+            Updates user.CompanyId on success.
+            </summary>
         </member>
         <member name="M:IdentityService.Controllers.AuthController.VerifyEmail(System.String)">
             <summary>Verify email address using token from verification email.</summary>
@@ -37,6 +47,9 @@
         <member name="M:IdentityService.Controllers.AuthController.UpdateMe(IdentityService.Models.DTOs.UpdateProfileRequest)">
             <summary>Update current user profile (display name only).</summary>
         </member>
+        <member name="M:IdentityService.Controllers.AuthController.LinkCompany(IdentityService.Models.DTOs.LinkCompanyRequest)">
+            <summary>Link a company to the recruiter account (one-time, set during registration).</summary>
+        </member>
         <member name="M:IdentityService.Controllers.AuthController.GetPublicKey">
             <summary>Get RSA public key in PEM format for JWT validation.</summary>
         </member>
@@ -51,6 +64,35 @@
         </member>
         <member name="M:IdentityService.Migrations.createinit.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="T:IdentityService.Migrations.AddCompanyIdToUser">
+            <inheritdoc />
+        </member>
+        <member name="M:IdentityService.Migrations.AddCompanyIdToUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:IdentityService.Migrations.AddCompanyIdToUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:IdentityService.Migrations.AddCompanyIdToUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:IdentityService.Models.DTOs.LinkCompanyRequest">
+            <summary>Request body for linking a company to a recruiter account (one-time only).</summary>
+        </member>
+        <member name="T:IdentityService.Models.DTOs.RegisterRequest">
+            <summary>
+            Payload for POST /auth/register.
+            When Role == "Recruiter", CompanyName is required and the remaining
+            Company* fields are optional. The server creates the Company record
+            atomically during registration — no deferred post-login processing.
+            </summary>
+        </member>
+        <member name="P:IdentityService.Models.DTOs.RegisterRequest.CompanyName">
+            <summary>Required when Role == "Recruiter".</summary>
+        </member>
+        <member name="M:IdentityService.Repositories.Interfaces.IUserRepository.DeleteUserAsync(System.Guid)">
+            <summary>Hard-deletes a user by ID — used for rollback on failed atomic registration.</summary>
         </member>
     </members>
 </doc>

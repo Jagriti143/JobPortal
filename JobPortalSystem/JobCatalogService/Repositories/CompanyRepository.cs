@@ -12,6 +12,11 @@ public class CompanyRepository(JobDbContext db) : ICompanyRepository
         return db.Companies.FindAsync(companyId).AsTask();
     }
 
+    public Task<Company?> GetCompanyByRecruiterIdAsync(Guid recruiterId)
+    {
+        return db.Companies.FirstOrDefaultAsync(c => c.RecruiterId == recruiterId);
+    }
+
     public Task<List<CompanyReview>> GetApprovedReviewsAsync(Guid companyId)
     {
         return db.CompanyReviews
@@ -27,6 +32,12 @@ public class CompanyRepository(JobDbContext db) : ICompanyRepository
     public Task AddCompanyAsync(Company company)
     {
         db.Companies.Add(company);
+        return db.SaveChangesAsync();
+    }
+
+    public Task UpdateCompanyAsync(Company company)
+    {
+        db.Companies.Update(company);
         return db.SaveChangesAsync();
     }
 }

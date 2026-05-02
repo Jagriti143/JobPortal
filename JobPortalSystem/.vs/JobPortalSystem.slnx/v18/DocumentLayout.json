@@ -1,21 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\",
+  "WorkspaceRootPath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\",
   "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{13CD7524-D7EF-FBA7-315C-8F7A194B195B}|ResumeService\\ResumeService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\resumeservice\\messages\\unlockresumecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13CD7524-D7EF-FBA7-315C-8F7A194B195B}|ResumeService\\ResumeService.csproj|solutionrelative:resumeservice\\messages\\unlockresumecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DDA886F-7022-E231-A5D2-8BDF0FBB44D6}|PaymentService\\PaymentService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\paymentservice\\messages\\unlockresumecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DDA886F-7022-E231-A5D2-8BDF0FBB44D6}|PaymentService\\PaymentService.csproj|solutionrelative:paymentservice\\messages\\unlockresumecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\adminservice\\controllers\\adminjobscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|solutionrelative:adminservice\\controllers\\adminjobscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\adminservice\\adminservice.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|solutionrelative:adminservice\\adminservice.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\arm64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{097373CB-FAA3-AD67-6941-D37DAD80B750}|JobCatalogService\\JobCatalogService.csproj|c:\\users\\jagriti\\desktop\\jop portal\\jobportalsystem\\jobcatalogservice\\services\\jobsyncservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\adminservice\\models\\revenuereportitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|solutionrelative:adminservice\\models\\revenuereportitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\adminservice\\data\\admindbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F465746A-A2E0-0013-6EA6-B03BA41B90F2}|AdminService\\AdminService.csproj|solutionrelative:adminservice\\data\\admindbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{097373CB-FAA3-AD67-6941-D37DAD80B750}|JobCatalogService\\JobCatalogService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\jobcatalogservice\\services\\jobsyncservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{097373CB-FAA3-AD67-6941-D37DAD80B750}|JobCatalogService\\JobCatalogService.csproj|solutionrelative:jobcatalogservice\\services\\jobsyncservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A234FC94-AA51-A558-AC74-0D69EA0D971A}|IdentityService\\IdentityService.csproj|c:\\users\\jagriti\\desktop\\jop portal\\jobportalsystem\\identityservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A234FC94-AA51-A558-AC74-0D69EA0D971A}|IdentityService\\IdentityService.csproj|c:\\users\\jagriti\\desktop\\jobportal\\jobportalsystem\\identityservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A234FC94-AA51-A558-AC74-0D69EA0D971A}|IdentityService\\IdentityService.csproj|solutionrelative:identityservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13CD7524-D7EF-FBA7-315C-8F7A194B195B}|ResumeService\\ResumeService.csproj|c:\\users\\jagriti\\desktop\\jop portal\\jobportalsystem\\resumeservice\\messages\\unlockresumecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13CD7524-D7EF-FBA7-315C-8F7A194B195B}|ResumeService\\ResumeService.csproj|solutionrelative:resumeservice\\messages\\unlockresumecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,7 +45,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,54 +65,112 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "UnlockResumeContracts.cs",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\PaymentService\\Messages\\UnlockResumeContracts.cs",
+              "RelativeDocumentMoniker": "PaymentService\\Messages\\UnlockResumeContracts.cs",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\PaymentService\\Messages\\UnlockResumeContracts.cs",
+              "RelativeToolTip": "PaymentService\\Messages\\UnlockResumeContracts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:14:38.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdminService.http",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\AdminService.http",
+              "RelativeDocumentMoniker": "AdminService\\AdminService.http",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\AdminService.http",
+              "RelativeToolTip": "AdminService\\AdminService.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-04-30T07:53:03.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RevenueReportItem.cs",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\Models\\RevenueReportItem.cs",
+              "RelativeDocumentMoniker": "AdminService\\Models\\RevenueReportItem.cs",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\Models\\RevenueReportItem.cs",
+              "RelativeToolTip": "AdminService\\Models\\RevenueReportItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T07:52:02.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\Data\\AdminDbContext.cs",
+              "RelativeDocumentMoniker": "AdminService\\Data\\AdminDbContext.cs",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\Data\\AdminDbContext.cs",
+              "RelativeToolTip": "AdminService\\Data\\AdminDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T07:51:54.263Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\arm64\\Microsoft.Common.CurrentVersion.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\arm64\\Microsoft.Common.CurrentVersion.targets",
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\arm64\\Microsoft.Common.CurrentVersion.targets",
               "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\arm64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AgIAAHgVAAAAAAAAAAAnwAQVAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAHgVAAAAAAAAAAAnwIUVAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2026-04-27T08:23:09.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T08:23:09.64Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "JobSyncService.cs",
-              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\JobCatalogService\\Services\\JobSyncService.cs",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\JobCatalogService\\Services\\JobSyncService.cs",
               "RelativeDocumentMoniker": "JobCatalogService\\Services\\JobSyncService.cs",
-              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\JobCatalogService\\Services\\JobSyncService.cs",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\JobCatalogService\\Services\\JobSyncService.cs",
               "RelativeToolTip": "JobCatalogService\\Services\\JobSyncService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T08:20:44.988Z",
+              "WhenOpened": "2026-04-27T08:20:44.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UnlockResumeContracts.cs",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService\\Messages\\UnlockResumeContracts.cs",
+              "RelativeDocumentMoniker": "ResumeService\\Messages\\UnlockResumeContracts.cs",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService\\Messages\\UnlockResumeContracts.cs",
+              "RelativeToolTip": "ResumeService\\Messages\\UnlockResumeContracts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T03:52:20.152Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\IdentityService\\Program.cs",
-              "RelativeDocumentMoniker": "IdentityService\\Program.cs",
-              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\IdentityService\\Program.cs",
-              "RelativeToolTip": "IdentityService\\Program.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAuwFkAAAAiAAAAAAAAAA==",
+              "Title": "AdminJobsController.cs",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\Controllers\\AdminJobsController.cs",
+              "RelativeDocumentMoniker": "AdminService\\Controllers\\AdminJobsController.cs",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService\\Controllers\\AdminJobsController.cs",
+              "RelativeToolTip": "AdminService\\Controllers\\AdminJobsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T07:06:44.509Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-30T07:53:11.919Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UnlockResumeContracts.cs",
-              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService\\Messages\\UnlockResumeContracts.cs",
-              "RelativeDocumentMoniker": "ResumeService\\Messages\\UnlockResumeContracts.cs",
-              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService\\Messages\\UnlockResumeContracts.cs",
-              "RelativeToolTip": "ResumeService\\Messages\\UnlockResumeContracts.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\IdentityService\\Program.cs",
+              "RelativeDocumentMoniker": "IdentityService\\Program.cs",
+              "ToolTip": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\IdentityService\\Program.cs",
+              "RelativeToolTip": "IdentityService\\Program.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAuwFkAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T03:52:20.152Z"
+              "WhenOpened": "2026-04-13T07:06:44.509Z"
             }
           ]
         }

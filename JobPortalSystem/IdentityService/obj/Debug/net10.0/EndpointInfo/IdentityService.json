@@ -10,7 +10,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Register a new JobSeeker or Recruiter account.",
+        "summary": "Register a new JobSeeker or Recruiter account.\r\nFor Recruiter registrations, CompanyName is required. The company record\r\nis created atomically in JobCatalogService before this endpoint returns.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -232,6 +232,38 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateProfileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/me/company": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Link a company to the recruiter account (one-time, set during registration).",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkCompanyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkCompanyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkCompanyRequest"
               }
             }
           }
@@ -965,6 +997,17 @@
         },
         "additionalProperties": false
       },
+      "LinkCompanyRequest": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for linking a company to a recruiter account (one-time only)."
+      },
       "LoginRequest": {
         "type": "object",
         "properties": {
@@ -1003,9 +1046,35 @@
           "role": {
             "type": "string",
             "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Required when Role == \"Recruiter\".",
+            "nullable": true
+          },
+          "companyDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyWebsite": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyLogoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyIndustry": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyLocation": {
+            "type": "string",
+            "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Payload for POST /auth/register.\r\nWhen Role == \"Recruiter\", CompanyName is required and the remaining\r\nCompany* fields are optional. The server creates the Company record\r\natomically during registration — no deferred post-login processing."
       },
       "ResetPasswordRequest": {
         "type": "object",

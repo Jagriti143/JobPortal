@@ -69,6 +69,22 @@
   },
   {
     "ContainingType": "IdentityService.Controllers.AuthController",
+    "Method": "LinkCompany",
+    "RelativePath": "auth/me/company",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "IdentityService.Models.DTOs.LinkCompanyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IdentityService.Controllers.AuthController",
     "Method": "GetPublicKey",
     "RelativePath": "auth/public-key",
     "HttpMethod": "GET",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService\\ResumeService.csproj": {}
+    "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService\\ResumeService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService\\ResumeService.csproj": {
+    "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService\\ResumeService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService\\ResumeService.csproj",
+        "projectUniqueName": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService\\ResumeService.csproj",
         "projectName": "ResumeService",
-        "projectPath": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService\\ResumeService.csproj",
+        "projectPath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService\\ResumeService.csproj",
         "packagesPath": "C:\\Users\\Jagriti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jagriti\\Desktop\\Jop Portal\\JobPortalSystem\\ResumeService\\obj\\",
+        "outputPath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -74,13 +74,9 @@
               "target": "Package",
               "version": "[10.0.0, )"
             },
-            "Ocelot": {
-              "target": "Package",
-              "version": "[24.0.0, )"
-            },
             "QuestPDF": {
               "target": "Package",
-              "version": "[2024.10.4, )"
+              "version": "[2025.4.0, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
@@ -533,6 +529,11 @@
             "System.Xml.XPath": "(,4.3.32767]",
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }

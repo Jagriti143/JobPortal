@@ -6,6 +6,8 @@ using IdentityService.Repositories.Interfaces;
 using IdentityService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace IdentityService.Controllers;
 
@@ -19,14 +21,24 @@ public class AuthController(
     IEmailService emailService,
     IRedisBlocklistService blocklist,
     IConfiguration config,
+    IHttpClientFactory httpClientFactory,
     ILogger<AuthController> logger) : ControllerBase
 {
     // ── POST /auth/register ──────────────────────────────────────────────────
-    /// <summary>Register a new JobSeeker or Recruiter account.</summary>
+    /// <summary>
+    /// Register a new JobSeeker or Recruiter account.
+    /// For Recruiter registrations, CompanyName is required. The company record
+    /// is created atomically in JobCatalogService before this endpoint returns.
+    /// </summary>
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest req)
     {
         var traceId = HttpContext.TraceIdentifier;
+
+        // ── Validate Recruiter must supply CompanyName ───────────────────────
+        if (req.Role == "Recruiter" && string.IsNullOrWhiteSpace(req.CompanyName))
+            return BadRequest(ResponseEnvelope<object>.Fail(
+                "Company name is required for Recruiter registration.", traceId));
 
         if (await userRepository.EmailExistsAsync(req.Email))
             return Conflict(ResponseEnvelope<object>.Fail("Email already registered.", traceId));
@@ -42,11 +54,91 @@ public class AuthController(
 
         await userRepository.AddUserAsync(user);
 
+        // ── Atomic company creation for Recruiters ───────────────────────────
+        if (req.Role == "Recruiter")
+        {
+            var companyCreated = await TryCreateCompanyAsync(user.Id, req, traceId);
+            if (!companyCreated)
+            {
+                // Roll back the user record to keep data consistent
+                await userRepository.DeleteUserAsync(user.Id);
+                return StatusCode(502, ResponseEnvelope<object>.Fail(
+                    "Company registration failed. Please try again.", traceId));
+            }
+        }
+
         await emailService.SendWelcomeEmailAsync(user.Email);
         await emailService.SendVerificationEmailAsync(user.Email, user.EmailVerificationToken!);
 
         logger.LogInformation("User registered: {Email} as {Role}", user.Email, user.Role);
         return StatusCode(201, ResponseEnvelope<object>.Ok(new { userId = user.Id }, traceId: traceId));
+    }
+
+    // ── Internal: call JobCatalogService to create Company atomically ─────────
+    /// <summary>
+    /// POSTs to JobCatalogService /companies/internal using the shared service key.
+    /// Updates user.CompanyId on success.
+    /// </summary>
+    private async Task<bool> TryCreateCompanyAsync(Guid userId, RegisterRequest req, string traceId)
+    {
+        try
+        {
+            var serviceKey = config["InternalServices:ServiceKey"] ?? string.Empty;
+            var client = httpClientFactory.CreateClient("JobCatalog");
+            client.DefaultRequestHeaders.Remove("X-Service-Key");
+            client.DefaultRequestHeaders.Add("X-Service-Key", serviceKey);
+
+            var payload = new
+            {
+                recruiterId = userId,
+                name = req.CompanyName,
+                description = req.CompanyDescription,
+                website = req.CompanyWebsite,
+                logoUrl = req.CompanyLogoUrl,
+                industry = req.CompanyIndustry,
+                location = req.CompanyLocation
+            };
+
+            var response = await client.PostAsJsonAsync("/companies/internal", payload);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                logger.LogError("JobCatalogService company creation failed: {Status} {Body}",
+                    response.StatusCode, body);
+                return false;
+            }
+
+            // Parse the returned companyId and link it to the user
+            var json = await response.Content.ReadFromJsonAsync<JsonElement>();
+            var companyIdStr = json
+                .GetProperty("data")
+                .GetProperty("companyId")
+                .GetString();
+
+            if (string.IsNullOrEmpty(companyIdStr) || !Guid.TryParse(companyIdStr, out var companyId))
+            {
+                logger.LogError("JobCatalogService returned invalid companyId: {Raw}", companyIdStr);
+                return false;
+            }
+
+            // Update the user record with the new companyId
+            var user = await userRepository.GetByIdAsync(userId);
+            if (user == null) return false;
+
+            user.CompanyId = companyId;
+            user.UpdatedAt = DateTime.UtcNow;
+            await userRepository.UpdateAsync(user);
+
+            logger.LogInformation(
+                "Company {CompanyId} created and linked to recruiter {UserId}", companyId, userId);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Exception while creating company for user {UserId}", userId);
+            return false;
+        }
     }
 
     // ── GET /auth/verify-email ───────────────────────────────────────────────
@@ -294,6 +386,32 @@ public class AuthController(
         await userRepository.UpdateAsync(user);
 
         return Ok(ResponseEnvelope<object>.Ok(new { message = "Profile updated." }, traceId: traceId));
+    }
+
+    // ── PUT /auth/me/company ──────────────────────────────────────────────────
+    /// <summary>Link a company to the recruiter account (one-time, set during registration).</summary>
+    [HttpPut("me/company")]
+    [Authorize(Roles = "Recruiter")]
+    public async Task<IActionResult> LinkCompany([FromBody] LinkCompanyRequest req)
+    {
+        var traceId = HttpContext.TraceIdentifier;
+        var userId = Guid.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+            ?? User.FindFirst("sub")?.Value ?? Guid.Empty.ToString());
+
+        var user = await userRepository.GetByIdAsync(userId);
+        if (user == null)
+            return NotFound(ResponseEnvelope<object>.Fail("User not found.", traceId));
+
+        if (user.CompanyId.HasValue)
+            return Conflict(ResponseEnvelope<object>.Fail(
+                "A company is already linked to this account. Company details cannot be changed after registration.", traceId));
+
+        user.CompanyId = req.CompanyId;
+        user.UpdatedAt = DateTime.UtcNow;
+        await userRepository.UpdateAsync(user);
+
+        logger.LogInformation("Recruiter {UserId} linked company {CompanyId}", userId, req.CompanyId);
+        return Ok(ResponseEnvelope<object>.Ok(new { message = "Company linked successfully.", companyId = req.CompanyId }, traceId: traceId));
     }
 
     // ── GET /auth/public-key ─────────────────────────────────────────────────

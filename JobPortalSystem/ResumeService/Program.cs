@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using QuestPDF.Infrastructure;
 using ResumeService.Common;
 using ResumeService.Data;
 using ResumeService.Middleware;
@@ -16,6 +17,9 @@ using MassTransit;
 using ResumeService.Consumers;
 using System.Net.Http.Json;
 using System.Security.Cryptography;
+
+// ── QuestPDF license — must be set BEFORE any QuestPDF type is first accessed ──
+QuestPDF.Settings.License = LicenseType.Community;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -164,4 +168,3 @@ app.Run();
 record PublicKeyResponse(string PublicKey);
 
 public partial class Program { }
-

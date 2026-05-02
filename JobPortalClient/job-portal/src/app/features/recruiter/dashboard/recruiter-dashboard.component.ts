@@ -1,6 +1,7 @@
-﻿import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -9,13 +10,13 @@ import { JobService } from '../../../core/services/job.service';
 import { ApplicationService } from '../../../core/services/application.service';
 import { WalletService } from '../../../core/services/wallet.service';
 import { ResumeService } from '../../../core/services/resume.service';
-
-const COMPANY_ID_KEY = 'recruiter_company_id';
+import { AuthService } from '../../../core/services/auth.service';
+import { Company } from '../../../core/models/index';
 
 @Component({
   selector: 'app-recruiter-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule,
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, MatButtonModule, MatIconModule,
     MatProgressSpinnerModule, MatSnackBarModule],  template: `
     <div class="recruiter-layout">
 
@@ -32,6 +33,9 @@ const COMPANY_ID_KEY = 'recruiter_company_id';
           <button class="sidebar-item" [class.active]="tab() === 'applicants'" (click)="tab.set('applicants'); loadAllApplicants()">
             <mat-icon>people</mat-icon> All Applicants
             <span class="badge" *ngIf="totalApplicants > 0">{{ totalApplicants }}</span>
+          </button>
+          <button class="sidebar-item" [class.active]="tab() === 'company'" (click)="tab.set('company'); loadCompany()">
+            <mat-icon>business</mat-icon> My Company
           </button>
           <a class="sidebar-item" routerLink="/recruiter/wallet">
             <mat-icon>account_balance_wallet</mat-icon> Wallet
@@ -126,7 +130,115 @@ const COMPANY_ID_KEY = 'recruiter_company_id';
           </div>
         </div>
 
-        <!-- â”€â”€ APPLICANTS TAB â”€â”€ -->
+        <!-- COMPANY TAB -->
+        <div *ngIf="tab() === 'company'">
+          <div class="section-header">
+            <h2><mat-icon>business</mat-icon> My Company</h2>
+            <button mat-stroked-button *ngIf="company && !editMode()" (click)="startEdit()">
+              <mat-icon>edit</mat-icon> Edit Details
+            </button>
+          </div>
+
+          <div *ngIf="loadingCompany" class="loading-center"><mat-spinner diameter="36"></mat-spinner></div>
+
+          <div *ngIf="!loadingCompany && companyError" class="no-company-card">
+            <mat-icon style="font-size:48px;width:48px;height:48px;color:#f87171;display:block;margin:0 auto 12px">business_off</mat-icon>
+            <h3>No Company Found</h3>
+            <p>Company details are registered once during account creation. Please contact support if you believe this is an error.</p>
+          </div>
+
+          <!-- VIEW MODE -->
+          <div *ngIf="!loadingCompany && company && !editMode()" class="company-detail-card">
+            <div class="company-detail-header">
+              <div class="company-logo-box" *ngIf="!company?.logoUrl"><mat-icon>business</mat-icon></div>
+              <img *ngIf="company?.logoUrl" [src]="company!.logoUrl" [alt]="company!.name" class="company-logo-img">
+              <div class="company-detail-info">
+                <h3>{{ company!.name }}</h3>
+                <div class="company-meta-row">
+                  <span *ngIf="company!.industry"><mat-icon>category</mat-icon>{{ company!.industry }}</span>
+                  <span *ngIf="company!.location"><mat-icon>location_on</mat-icon>{{ company!.location }}</span>
+                  <a *ngIf="company!.website" [href]="company!.website" target="_blank" class="company-link">
+                    <mat-icon>language</mat-icon>{{ company!.website }}
+                  </a>
+                </div>
+              </div>
+              <div class="verified-badge"><mat-icon>verified</mat-icon> Verified</div>
+            </div>
+            <div *ngIf="company!.description" class="company-desc">{{ company!.description }}</div>
+          </div>
+
+          <!-- EDIT MODE -->
+          <div *ngIf="!loadingCompany && company && editMode()" class="company-detail-card">
+            <form [formGroup]="editForm" (ngSubmit)="saveCompany()" class="company-edit-form">
+              <div class="edit-form-grid">
+
+                <div class="edit-field">
+                  <label class="edit-label">Company Name <span class="req">*</span></label>
+                  <div class="edit-input-wrap" [class.err]="editForm.get('name')?.invalid && editForm.get('name')?.touched">
+                    <mat-icon>apartment</mat-icon>
+                    <input type="text" formControlName="name" placeholder="e.g. Acme Corp">
+                  </div>
+                  <span class="edit-error" *ngIf="editForm.get('name')?.hasError('required') && editForm.get('name')?.touched">Name is required</span>
+                </div>
+
+                <div class="edit-field">
+                  <label class="edit-label">Industry</label>
+                  <div class="edit-input-wrap">
+                    <mat-icon>category</mat-icon>
+                    <input type="text" formControlName="industry" placeholder="e.g. Technology">
+                  </div>
+                </div>
+
+                <div class="edit-field">
+                  <label class="edit-label">Location</label>
+                  <div class="edit-input-wrap">
+                    <mat-icon>location_on</mat-icon>
+                    <input type="text" formControlName="location" placeholder="e.g. Bangalore">
+                  </div>
+                </div>
+
+                <div class="edit-field">
+                  <label class="edit-label">Website</label>
+                  <div class="edit-input-wrap">
+                    <mat-icon>language</mat-icon>
+                    <input type="url" formControlName="website" placeholder="https://...">
+                  </div>
+                </div>
+
+                <div class="edit-field edit-field-full">
+                  <label class="edit-label">Logo URL</label>
+                  <div class="edit-input-wrap">
+                    <mat-icon>image</mat-icon>
+                    <input type="url" formControlName="logoUrl" placeholder="https://...">
+                  </div>
+                </div>
+
+                <div class="edit-field edit-field-full">
+                  <label class="edit-label">Description</label>
+                  <div class="edit-input-wrap edit-textarea-wrap">
+                    <mat-icon style="margin-top:13px">description</mat-icon>
+                    <textarea formControlName="description" rows="4" placeholder="Brief company description..."></textarea>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="edit-actions">
+                <button type="button" mat-stroked-button (click)="cancelEdit()" [disabled]="savingCompany">
+                  <mat-icon>close</mat-icon> Cancel
+                </button>
+                <button type="submit" mat-raised-button color="primary"
+                  [disabled]="editForm.invalid || savingCompany">
+                  <mat-spinner diameter="16" *ngIf="savingCompany"></mat-spinner>
+                  <mat-icon *ngIf="!savingCompany">save</mat-icon>
+                  {{ savingCompany ? 'Saving...' : 'Save Changes' }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ——— APPLICANTS TAB ——— -->
         <div *ngIf="tab() === 'applicants'">
           <div class="section-header">
             <h2><mat-icon>people</mat-icon> Applicants</h2>
@@ -313,16 +425,112 @@ const COMPANY_ID_KEY = 'recruiter_company_id';
     .text-muted { color:#64748b }
     .text-sm { font-size:.8rem }
     @media(max-width:900px){ .recruiter-sidebar{display:none} .stats-row{grid-template-columns:repeat(2,1fr)} .recruiter-main{padding:16px} .job-card{flex-direction:column;align-items:flex-start} }
+    .company-detail-card { background:white;border-radius:14px;padding:24px;border:1px solid #e8ede4;box-shadow:0 1px 4px rgba(26,46,18,.04) }
+    .company-detail-header { display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;flex-wrap:wrap }
+    .company-logo-box { width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#1a2e12,#6b8660);color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0 }
+    .company-logo-box mat-icon { font-size:32px;width:32px;height:32px }
+    .company-logo-img { width:64px;height:64px;border-radius:14px;object-fit:cover;flex-shrink:0 }
+    .company-detail-info { flex:1 }
+    .company-detail-info h3 { font-size:1.2rem;font-weight:700;color:#1a2e12;margin-bottom:8px }
+    .company-meta-row { display:flex;flex-wrap:wrap;gap:12px }
+    .company-meta-row span,.company-link { display:flex;align-items:center;gap:4px;font-size:.82rem;color:#4a6741 }
+    .company-meta-row mat-icon,.company-link mat-icon { font-size:14px;width:14px;height:14px }
+    .company-link { text-decoration:none } .company-link:hover { text-decoration:underline }
+    .verified-badge { display:flex;align-items:center;gap:5px;background:#d1fae5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 12px;font-size:.78rem;font-weight:700;color:#065f46;flex-shrink:0 }
+    .verified-badge mat-icon { font-size:15px;width:15px;height:15px;color:#059669 }
+    .company-desc { font-size:.88rem;color:#64748b;line-height:1.6;padding:12px 0;border-top:1px solid #f0f7ec;margin-top:4px }
+    .company-readonly-note { display:flex;align-items:center;gap:6px;font-size:.78rem;color:#94a3b8;margin-top:14px;padding:10px 12px;background:#fafaf8;border-radius:8px;border:1px solid #e8ede4 }
+    .company-readonly-note mat-icon { font-size:15px;width:15px;height:15px;color:#cbd5e1 }
+    .no-company-card { text-align:center;background:#fff;border:1.5px solid #fecaca;border-radius:14px;padding:48px 32px }
+    .no-company-card h3 { font-size:1.1rem;font-weight:700;color:#1a2e12;margin:12px 0 8px } .no-company-card p { color:#64748b }
+    /* Edit form */
+    .company-edit-form { display:flex;flex-direction:column;gap:20px }
+    .edit-form-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px }
+    .edit-field-full { grid-column:1/-1 }
+    .edit-label { display:block;font-size:.8rem;font-weight:600;color:#3d5a30;margin-bottom:6px }
+    .req { color:#dc2626 }
+    .edit-input-wrap { display:flex;align-items:center;border:1.5px solid #e8ede4;border-radius:10px;background:#f8faf6;transition:all .2s;overflow:hidden }
+    .edit-textarea-wrap { align-items:flex-start }
+    .edit-input-wrap:focus-within { border-color:#6b8660;background:#fff;box-shadow:0 0 0 3px rgba(107,134,96,.1) }
+    .edit-input-wrap.err { border-color:#dc2626 }
+    .edit-input-wrap mat-icon { font-size:17px;width:17px;height:17px;color:#8a9e80;padding:0 10px;flex-shrink:0 }
+    .edit-input-wrap input,.edit-input-wrap textarea { flex:1;border:none;outline:none;background:transparent;font-size:.88rem;color:#1a2e12;padding:12px 10px 12px 0;font-family:'Inter',sans-serif }
+    .edit-input-wrap textarea { resize:vertical;min-height:90px;padding-top:12px }
+    .edit-error { display:block;font-size:.73rem;color:#dc2626;margin-top:3px }
+    .edit-actions { display:flex;gap:10px;justify-content:flex-end;padding-top:8px;border-top:1px solid #f0f7ec }
+    @media(max-width:700px){ .edit-form-grid{grid-template-columns:1fr} }
   `]
 })
 export class RecruiterDashboardComponent implements OnInit {
-  private jobService = inject(JobService);
-  private appService = inject(ApplicationService);
+  private jobService    = inject(JobService);
+  private appService    = inject(ApplicationService);
   private walletService = inject(WalletService);
   private resumeService = inject(ResumeService);
-  private snack = inject(MatSnackBar);
+  private authService   = inject(AuthService);
+  private fb            = inject(FormBuilder);
+  private snack         = inject(MatSnackBar);
 
-  tab = signal<'jobs' | 'applicants'>('jobs');
+  // Company edit state
+  editMode      = signal(false);
+  savingCompany = false;
+  editForm = this.fb.group({
+    name:        ['', Validators.required],
+    industry:    [''],
+    location:    [''],
+    website:     [''],
+    logoUrl:     [''],
+    description: ['']
+  });
+
+  startEdit(): void {
+    if (!this.company) return;
+    this.editForm.patchValue({
+      name:        this.company.name        ?? '',
+      industry:    this.company.industry    ?? '',
+      location:    this.company.location    ?? '',
+      website:     this.company.website     ?? '',
+      logoUrl:     this.company.logoUrl     ?? '',
+      description: this.company.description ?? ''
+    });
+    this.editMode.set(true);
+  }
+
+  cancelEdit(): void { this.editMode.set(false); }
+
+  saveCompany(): void {
+    if (this.editForm.invalid || !this.company) return;
+    this.savingCompany = true;
+    const v = this.editForm.value;
+    this.jobService.updateMyCompany({
+      name:        v.name        || undefined,
+      industry:    v.industry    || undefined,
+      location:    v.location    || undefined,
+      website:     v.website     || undefined,
+      logoUrl:     v.logoUrl     || undefined,
+      description: v.description || undefined
+    }).subscribe({
+      next: res => {
+        this.savingCompany = false;
+        if (res.success && res.data) {
+          this.company = res.data;
+          this.editMode.set(false);
+          this.snack.open('Company details updated successfully!', 'OK', { duration: 3500 });
+        }
+      },
+      error: err => {
+        this.savingCompany = false;
+        this.snack.open(err.error?.message ?? 'Failed to update company.', 'Close', { duration: 4000 });
+      }
+    });
+  }
+
+  tab = signal<'jobs' | 'applicants' | 'company'>('jobs');
+
+  // Company panel state
+  company: Company | null = null;
+  loadingCompany = false;
+  companyError = false;
+  private companyLoaded = false;
 
   jobs: any[] = [];
   allApplicants: any[] = [];
@@ -340,18 +548,41 @@ export class RecruiterDashboardComponent implements OnInit {
   get totalApplicants() { return this.allApplicants.length; }
 
   ngOnInit(): void {
+    // Load jobs directly via the authenticated endpoint — no companyId needed on the client.
+    // GET /jobs/my resolves the recruiter from the JWT on the backend.
     this.loadJobs();
     this.walletService.getWalletBalance().subscribe({
       next: res => { this.walletBalance = res.data?.balance ?? 0; }
     });
   }
 
-  loadJobs(): void {
-    const companyId = localStorage.getItem('recruiter_company_id');
-    if (!companyId) return;
+  /** Fetch company from backend — cached after first successful load. */
+  loadCompany(): void {
+    if (this.companyLoaded) return;
+    this.loadingCompany = true;
+    this.companyError = false;
+    this.jobService.getMyCompany().subscribe({
+      next: res => {
+        this.loadingCompany = false;
+        if (res.success && res.data) {
+          this.company = res.data;
+          this.companyLoaded = true;
+        } else {
+          this.companyError = true;
+        }
+      },
+      error: () => {
+        this.loadingCompany = false;
+        this.companyError = true;
+      }
+    });
+  }
 
+  loadJobs(): void {
+    // Uses GET /jobs/my — backend resolves recruiter identity from JWT.
+    // Returns ALL jobs (Pending, Approved, Flagged) so the dashboard is always accurate.
     this.loadingJobs = true;
-    this.jobService.getJobsByCompany(companyId).subscribe({
+    this.jobService.getMyJobs().subscribe({
       next: res => {
         this.loadingJobs = false;
         this.jobs = res.data ?? [];

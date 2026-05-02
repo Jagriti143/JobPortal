@@ -5,7 +5,16 @@
     </assembly>
     <members>
         <member name="M:JobCatalogService.Controllers.CompaniesController.GetCompany(System.Guid)">
-            <summary>Get company profile.</summary>
+            <summary>Get company profile by ID.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.CompaniesController.GetMyCompany">
+            <summary>Get the company associated with the currently logged-in recruiter.</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.CompaniesController.UpdateMyCompany(JobCatalogService.Models.DTOs.UpdateCompanyRequest)">
+            <summary>
+            Update the company owned by the currently logged-in recruiter.
+            Only non-null fields in the request body are applied; others are left unchanged.
+            </summary>
         </member>
         <member name="M:JobCatalogService.Controllers.CompaniesController.GetReviews(System.Guid)">
             <summary>Get company reviews.</summary>
@@ -14,7 +23,17 @@
             <summary>Submit a company review (JobSeeker only).</summary>
         </member>
         <member name="M:JobCatalogService.Controllers.CompaniesController.CreateCompany(JobCatalogService.Models.DTOs.CreateCompanyRequest)">
-            <summary>Create a new company.</summary>
+            <summary>
+            Create a company profile (Recruiter only, called once during registration flow).
+            A recruiter may only own one company — subsequent calls return 409 Conflict.
+            </summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.CompaniesController.CreateCompanyInternal(JobCatalogService.Models.DTOs.CreateCompanyInternalRequest)">
+            <summary>
+            Internal endpoint called ONLY by IdentityService during recruiter registration.
+            Protected by X-Service-Key header — NOT JWT Bearer.
+            Creates a Company record with the supplied RecruiterId and returns the companyId.
+            </summary>
         </member>
         <member name="M:JobCatalogService.Controllers.JobsController.Search(System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Int32,System.Int32)">
             <summary>Search jobs via Elasticsearch.</summary>
@@ -23,7 +42,13 @@
             <summary>Get job detail by ID.</summary>
         </member>
         <member name="M:JobCatalogService.Controllers.JobsController.GetJobsByCompany(System.Guid)">
-            <summary>Get all approved jobs for a company.</summary>
+            <summary>Get all approved jobs for a company (public).</summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.GetMyJobs">
+            <summary>
+            Get all jobs posted by the currently authenticated recruiter (all statuses).
+            Used exclusively by the recruiter dashboard — no companyId required from client.
+            </summary>
         </member>
         <member name="M:JobCatalogService.Controllers.JobsController.CreateJob(JobCatalogService.Models.DTOs.CreateJobRequest)">
             <summary>Post a new job listing (Recruiter only).</summary>
@@ -35,7 +60,13 @@
             <summary>Delete (soft) a job listing — Recruiter can only delete own jobs.</summary>
         </member>
         <member name="M:JobCatalogService.Controllers.JobsController.UpdateStatus(System.Guid,JobCatalogService.Models.DTOs.UpdateModerationStatusRequest)">
-            <summary>Update job moderation status (Admin only).</summary>
+            <summary>
+            Update job moderation status — called by AdminService after approve/flag.
+            Protected by X-Service-Key header (internal service-to-service auth).
+            </summary>
+        </member>
+        <member name="M:JobCatalogService.Controllers.JobsController.ResyncElasticsearch">
+            <summary>Force a full Elasticsearch re-sync of all approved jobs (Admin only).</summary>
         </member>
         <member name="T:JobCatalogService.Migrations.createinit">
             <inheritdoc />
@@ -48,6 +79,49 @@
         </member>
         <member name="M:JobCatalogService.Migrations.createinit.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="T:JobCatalogService.Migrations.AddRecruiterIdToCompany">
+            <inheritdoc />
+        </member>
+        <member name="M:JobCatalogService.Migrations.AddRecruiterIdToCompany.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobCatalogService.Migrations.AddRecruiterIdToCompany.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobCatalogService.Migrations.AddRecruiterIdToCompany.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:JobCatalogService.Models.DTOs.CreateCompanyInternalRequest">
+            <summary>
+            DTO for the internal POST /companies/internal endpoint.
+            Called only by IdentityService during recruiter registration.
+            RecruiterId is passed directly (not extracted from JWT).
+            </summary>
+        </member>
+        <member name="T:JobCatalogService.Models.DTOs.UpdateCompanyRequest">
+            <summary>
+            DTO for PUT /companies/my — recruiter updates their own company details.
+            All fields are optional; only non-null values will overwrite existing data.
+            </summary>
+        </member>
+        <member name="M:JobCatalogService.Repositories.Interfaces.IJobRepository.GetJobsByRecruiterAsync(System.Guid)">
+            <summary>
+            Returns ALL jobs posted by this recruiter (all statuses, non-deleted).
+            Used by GET /jobs/my — the recruiter's own dashboard view.
+            </summary>
+        </member>
+        <member name="M:JobCatalogService.Services.ElasticsearchService.EnsureIndexAsync">
+            <summary>
+            Creates the index with explicit mappings if it does not already exist.
+            ModerationStatus and JobType are mapped as keyword so term filters work reliably.
+            </summary>
+        </member>
+        <member name="M:JobCatalogService.Services.ElasticsearchService.GetAllIndexedJobIdsAsync">
+            <summary>
+            Returns all job IDs currently indexed in Elasticsearch.
+            Used by JobSyncService to detect orphans (hard-deleted from DB but still in ES).
+            </summary>
         </member>
         <member name="T:JobCatalogService.Services.RsaKeyProvider">
             <summary>

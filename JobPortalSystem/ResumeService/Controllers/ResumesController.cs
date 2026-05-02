@@ -18,13 +18,37 @@ public class ResumesController(
     IResumeRepository resumeRepository,
     IPdfGeneratorService pdfService,
     ResumeDbContext db,
-    IPublishEndpoint publishEndpoint,
-    ILogger<ResumesController> logger) : ControllerBase
+    IPublishEndpoint publishEndpoint) : ControllerBase
 {
     private Guid GetUserId() =>
         Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)
             ?? User.FindFirstValue("sub")
             ?? Guid.Empty.ToString());
+
+    /// <summary>
+    /// Safely parse a date string from the Angular month-picker (“YYYY-MM” or “YYYY-MM-DD”)
+    /// into a nullable DateTime. Returns null for null/empty input so optional dates don’t
+    /// cause 400 Bad Request when the user leaves the field blank.
+    /// </summary>
+    private static DateTime? ParseDate(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return null;
+        // “2020-01” → first day of that month
+        if (value.Length == 7 && DateTime.TryParseExact(
+                value + "-01",
+                "yyyy-MM-dd",
+                System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None,
+                out var d))
+            return d;
+        // “2020-01-15” or ISO format
+        if (DateTime.TryParse(value,
+                System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal,
+                out var dt))
+            return dt.ToUniversalTime();
+        return null;
+    }
 
     // ---------------- GET TEMPLATES ----------------
 
@@ -47,19 +71,24 @@ public class ResumesController(
     public async Task<IActionResult> GetMyResumes()
     {
         var ownerId = GetUserId();
-
         var resumes = await resumeRepository.GetResumesByOwnerAsync(ownerId);
-
-        var dtos = resumes.Select(r => new
-        {
-            r.Id,
-            r.Title,
-            r.Summary,
-            r.TemplateId,
-            r.UpdatedAt
-        });
-
+        var dtos = resumes.Select(ResumeResponseDto.FromEntity);
         return Ok(ResponseEnvelope<object>.Ok(dtos, traceId: HttpContext.TraceIdentifier));
+    }
+
+    // ---------------- GET SINGLE RESUME (owner) ----------------
+
+    [HttpGet("{resumeId:guid}")]
+    [Authorize(Roles = "JobSeeker")]
+    public async Task<IActionResult> GetMyResume(Guid resumeId)
+    {
+        var ownerId = GetUserId();
+        var resume = await resumeRepository.GetResumeWithDetailsAsync(resumeId);
+        if (resume == null)
+            return NotFound(ResponseEnvelope<object>.Fail("Resume not found.", HttpContext.TraceIdentifier));
+        if (resume.OwnerId != ownerId)
+            return Forbid();
+        return Ok(ResponseEnvelope<object>.Ok(ResumeResponseDto.FromEntity(resume), traceId: HttpContext.TraceIdentifier));
     }
 
     // ---------------- CREATE RESUME ----------------
@@ -86,8 +115,8 @@ public class ResumesController(
                     Institution = e.Institution,
                     Degree = e.Degree,
                     FieldOfStudy = e.FieldOfStudy,
-                    StartDate = e.StartDate,
-                    EndDate = e.EndDate
+                    StartDate = ParseDate(e.StartDate) ?? DateTime.UtcNow,
+                    EndDate = ParseDate(e.EndDate)
                 });
 
         if (req.Experiences != null)
@@ -97,8 +126,8 @@ public class ResumesController(
                     Company = e.Company,
                     JobTitle = e.JobTitle,
                     Description = e.Description,
-                    StartDate = e.StartDate,
-                    EndDate = e.EndDate,
+                    StartDate = ParseDate(e.StartDate) ?? DateTime.UtcNow,
+                    EndDate = ParseDate(e.EndDate),
                     IsCurrentRole = e.IsCurrentRole
                 });
 
@@ -167,8 +196,8 @@ public class ResumesController(
                 Institution = e.Institution,
                 Degree = e.Degree,
                 FieldOfStudy = e.FieldOfStudy,
-                StartDate = e.StartDate,
-                EndDate = e.EndDate
+                StartDate = ParseDate(e.StartDate) ?? DateTime.UtcNow,
+                EndDate = ParseDate(e.EndDate)
             }));
 
         if (req.Experiences != null)
@@ -178,8 +207,8 @@ public class ResumesController(
                 Company = e.Company,
                 JobTitle = e.JobTitle,
                 Description = e.Description,
-                StartDate = e.StartDate,
-                EndDate = e.EndDate,
+                StartDate = ParseDate(e.StartDate) ?? DateTime.UtcNow,
+                EndDate = ParseDate(e.EndDate),
                 IsCurrentRole = e.IsCurrentRole
             }));
 
@@ -214,21 +243,30 @@ public class ResumesController(
     public async Task<IActionResult> GetPdf(Guid resumeId)
     {
         var userId = GetUserId();
-        var role = User.FindFirstValue(ClaimTypes.Role)
-                   ?? User.FindFirstValue("http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
-                   ?? string.Empty;
 
         var resume = await resumeRepository.GetResumeWithDetailsAsync(resumeId);
         if (resume == null)
             return NotFound(ResponseEnvelope<object>.Fail("Resume not found.", HttpContext.TraceIdentifier));
 
         // JobSeekers can only download their own resume
-        if (role == "JobSeeker" && resume.OwnerId != userId)
+        if (User.IsInRole("JobSeeker") && resume.OwnerId != userId)
             return Forbid();
 
         // Recruiters can download any resume (points already deducted by frontend)
-        var pdf = pdfService.GeneratePdf(resume);
-        return File(pdf, "application/pdf", $"resume-{resumeId}.pdf");
+        try
+        {
+            var pdf = pdfService.GeneratePdf(resume);
+            return File(pdf, "application/pdf", $"resume-{resumeId}.pdf");
+        }
+        catch (Exception ex)
+        {
+            var logger = HttpContext.RequestServices.GetRequiredService<ILogger<ResumesController>>();
+            logger.LogError(ex, "PDF generation failed for resume {ResumeId}", resumeId);
+            return StatusCode(500,
+                ResponseEnvelope<object>.Fail(
+                    "PDF generation failed. Please try again later.",
+                    HttpContext.TraceIdentifier));
+        }
     }
 
     // ---------------- UNLOCK RESUME ----------------
@@ -311,5 +349,23 @@ public class ResumesController(
         var dto = ResumeResponseDto.FromEntity(resume);
 
         return Ok(ResponseEnvelope<object>.Ok(dto, traceId: traceId));
+    }
+
+    // ---------------- DELETE RESUME ----------------
+
+    /// <summary>Permanently delete a resume. Only the owning JobSeeker may do this.</summary>
+    [HttpDelete("{resumeId:guid}")]
+    [Authorize(Roles = "JobSeeker")]
+    public async Task<IActionResult> DeleteResume(Guid resumeId)
+    {
+        var ownerId = GetUserId();
+        var deleted = await resumeRepository.DeleteResumeAsync(resumeId, ownerId);
+
+        if (!deleted)
+            return NotFound(ResponseEnvelope<object>.Fail(
+                "Resume not found or you do not have permission to delete it.",
+                HttpContext.TraceIdentifier));
+
+        return NoContent(); // 204
     }
 }

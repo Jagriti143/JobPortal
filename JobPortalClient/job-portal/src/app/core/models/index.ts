@@ -12,9 +12,20 @@ export interface ApiResponse<T> {
 // 1. Authentication & Identity
 // ------------------------------------
 export interface LoginRequest { email: string; password: string; }
-export interface RegisterRequest { email: string; password: string; role: 'JobSeeker' | 'Recruiter'; }
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  role: 'JobSeeker' | 'Recruiter';
+  // Company fields — provided only when role === 'Recruiter'
+  companyName?: string;
+  companyDescription?: string;
+  companyWebsite?: string;
+  companyLogoUrl?: string;
+  companyIndustry?: string;
+  companyLocation?: string;
+}
 export interface AuthResponse { accessToken: string; refreshToken: string; expiresIn: number; }
-export interface UserProfile { id: string; email: string; role: 'JobSeeker' | 'Recruiter' | 'Admin'; displayName?: string; emailVerified: boolean; }
+export interface UserProfile { id: string; email: string; role: 'JobSeeker' | 'Recruiter' | 'Admin'; displayName?: string; emailVerified: boolean; companyId?: string; }
 
 // ------------------------------------
 // 2. Jobs & Companies (JobCatalogService)
@@ -26,7 +37,7 @@ export interface Job {
   createdAt: string; updatedAt: string; company?: Company;
 }
 export interface Company {
-  id: string; name: string; description?: string; website?: string;
+  id: string; recruiterId: string; name: string; description?: string; website?: string;
   logoUrl?: string; industry?: string; location?: string; createdAt: string;
 }
 export interface JobSearchParams { q?: string; location?: string; jobType?: string; salaryMin?: number; salaryMax?: number; page?: number; limit?: number; }

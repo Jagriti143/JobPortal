@@ -13,9 +13,10 @@ namespace JobCatalogService.Controllers;
 [ApiController]
 [Route("jobs")]
 public class JobsController(
-    IJobRepository jobRepository, 
-    ICompanyRepository companyRepository, 
-    IElasticsearchService es, 
+    IJobRepository jobRepository,
+    ICompanyRepository companyRepository,
+    IElasticsearchService es,
+    IConfiguration config,
     ILogger<JobsController> logger) : ControllerBase
 {
     /// <summary>Search jobs via Elasticsearch.</summary>
@@ -46,11 +47,27 @@ public class JobsController(
         return Ok(ResponseEnvelope<object>.Ok(JobResponseDto.FromEntity(job), traceId: HttpContext.TraceIdentifier));
     }
 
-    /// <summary>Get all approved jobs for a company.</summary>
+    /// <summary>Get all approved jobs for a company (public).</summary>
     [HttpGet("company/{companyId:guid}")]
     public async Task<IActionResult> GetJobsByCompany(Guid companyId)
     {
         var jobs = await jobRepository.GetJobsByCompanyAsync(companyId);
+        var dtos = jobs.Select(JobResponseDto.FromEntity).ToList();
+        return Ok(ResponseEnvelope<object>.Ok(dtos, traceId: HttpContext.TraceIdentifier));
+    }
+
+    /// <summary>
+    /// Get all jobs posted by the currently authenticated recruiter (all statuses).
+    /// Used exclusively by the recruiter dashboard — no companyId required from client.
+    /// </summary>
+    [HttpGet("my")]
+    [Authorize(Roles = "Recruiter")]
+    public async Task<IActionResult> GetMyJobs()
+    {
+        var recruiterId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)
+            ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
+
+        var jobs = await jobRepository.GetJobsByRecruiterAsync(recruiterId);
         var dtos = jobs.Select(JobResponseDto.FromEntity).ToList();
         return Ok(ResponseEnvelope<object>.Ok(dtos, traceId: HttpContext.TraceIdentifier));
     }
@@ -63,12 +80,16 @@ public class JobsController(
         var recruiterId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)
             ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
 
-        var company = await companyRepository.GetCompanyByIdAsync(req.CompanyId);
-        if (company == null) return BadRequest(ResponseEnvelope<object>.Fail("Company not found.", HttpContext.TraceIdentifier));
+        // Auto-fetch the company registered during this recruiter's registration
+        var company = await companyRepository.GetCompanyByRecruiterIdAsync(recruiterId);
+        if (company == null)
+            return BadRequest(ResponseEnvelope<object>.Fail(
+                "No company registered for your account. A recruiter must have a registered company to post jobs.",
+                HttpContext.TraceIdentifier));
 
         var job = new Job
         {
-            CompanyId = req.CompanyId,
+            CompanyId = company.Id,
             PostedByRecruiterId = recruiterId,
             Title = req.Title,
             Description = req.Description,
@@ -80,7 +101,8 @@ public class JobsController(
         };
 
         await jobRepository.AddJobAsync(job);
-        _ = es.IndexJobAsync(job, company.Name);
+        // Do NOT index into Elasticsearch yet — only Approved jobs are searchable.
+        // The Admin will approve via PATCH /jobs/{id}/status which triggers indexing.
 
         return StatusCode(201, ResponseEnvelope<object>.Ok(new { jobId = job.Id }, traceId: HttpContext.TraceIdentifier));
     }
@@ -131,11 +153,25 @@ public class JobsController(
             new { jobId, message = "Job listing removed successfully." }, traceId: traceId));
     }
 
-    /// <summary>Update job moderation status (Admin only).</summary>
+    /// <summary>
+    /// Update job moderation status — called by AdminService after approve/flag.
+    /// Protected by X-Service-Key header (internal service-to-service auth).
+    /// </summary>
     [HttpPatch("{jobId:guid}/status")]
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]   // JWT not used here — AdminService is a backend process with no user token
     public async Task<IActionResult> UpdateStatus(Guid jobId, [FromBody] UpdateModerationStatusRequest req)
     {
+        // Validate the shared internal service key
+        var expectedKey = config["InternalServices:ServiceKey"] ?? string.Empty;
+        if (string.IsNullOrEmpty(expectedKey)
+            || !Request.Headers.TryGetValue("X-Service-Key", out var providedKey)
+            || providedKey.ToString() != expectedKey)
+        {
+            return StatusCode(401, ResponseEnvelope<object>.Fail(
+                "Unauthorized internal request.", HttpContext.TraceIdentifier));
+        }
+
+        // GetJobByIdAsync eagerly loads Company via Include(j => j.Company)
         var job = await jobRepository.GetJobByIdAsync(jobId);
         if (job == null) return NotFound(ResponseEnvelope<object>.Fail("Job not found.", HttpContext.TraceIdentifier));
 
@@ -143,11 +179,75 @@ public class JobsController(
         job.UpdatedAt = DateTime.UtcNow;
         await jobRepository.UpdateJobAsync(job);
 
-        if (req.Status == "Flagged")
-            _ = es.RemoveJobAsync(jobId);
-        else if (req.Status == "Approved")
-            _ = es.UpdateJobAsync(job, job.Company?.Name ?? "Unknown");
+        switch (req.Status)
+        {
+            case "Approved":
+                // Index with the real company name (loaded via Include)
+                await es.IndexJobAsync(job, job.Company?.Name ?? "Unknown");
+                logger.LogInformation("Job {JobId} approved and indexed in Elasticsearch.", jobId);
+                break;
+            case "Flagged":
+            case "Pending":
+                // Remove from search — job should not be publicly visible
+                await es.RemoveJobAsync(jobId);
+                logger.LogInformation("Job {JobId} set to {Status} and removed from Elasticsearch.", jobId, req.Status);
+                break;
+        }
 
         return Ok(ResponseEnvelope<object>.Ok(new { jobId, status = req.Status }, traceId: HttpContext.TraceIdentifier));
+    }
+
+    /// <summary>Force a full Elasticsearch re-sync of all approved jobs (Admin only).</summary>
+    [HttpPost("admin/resync")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> ResyncElasticsearch()
+    {
+        var traceId = HttpContext.TraceIdentifier;
+        try
+        {
+            await es.EnsureIndexAsync();
+
+            var allJobs = await jobRepository.GetAllJobsAsync();
+            var synced = 0;
+            var removed = 0;
+            var dbIds = new HashSet<string>();
+
+            foreach (var job in allJobs)
+            {
+                dbIds.Add(job.Id.ToString());
+                if (job.ModerationStatus == "Approved" && !job.IsDeleted)
+                {
+                    var company = await companyRepository.GetCompanyByIdAsync(job.CompanyId);
+                    await es.IndexJobAsync(job, company?.Name ?? "Unknown");
+                    synced++;
+                }
+                else
+                {
+                    await es.RemoveJobAsync(job.Id);
+                    removed++;
+                }
+            }
+
+            // Orphan cleanup — remove ES docs that no longer exist in DB
+            var esIds = await es.GetAllIndexedJobIdsAsync();
+            foreach (var esId in esIds)
+            {
+                if (!dbIds.Contains(esId))
+                {
+                    await es.RemoveJobAsync(Guid.Parse(esId));
+                    removed++;
+                }
+            }
+
+            logger.LogInformation("Manual ES resync: indexed {Synced}, removed {Removed}", synced, removed);
+            return Ok(ResponseEnvelope<object>.Ok(
+                new { synced, removed, message = "Elasticsearch re-sync completed successfully." },
+                traceId: traceId));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Manual ES resync failed");
+            return StatusCode(500, ResponseEnvelope<object>.Fail("Re-sync failed: " + ex.Message, traceId));
+        }
     }
 }

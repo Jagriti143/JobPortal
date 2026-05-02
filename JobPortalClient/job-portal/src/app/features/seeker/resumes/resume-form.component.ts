@@ -899,7 +899,13 @@ export class ResumeFormComponent implements OnInit {
 
   addEdu() { this.eduArray.push(this.fb.group({ institution: [''], degree: [''], fieldOfStudy: [''], startDate: [''], endDate: [''] })); }
   removeEdu(i: number) { this.eduArray.removeAt(i); }
-  addExp() { this.expArray.push(this.fb.group({ company: [''], jobTitle: [''], description: [''], startDate: [''], endDate: [''], isCurrentRole: [false] })); }
+  addExp() {
+    const grp = this.fb.group({ company: [''], jobTitle: [''], description: [''], startDate: [''], endDate: [''], isCurrentRole: [false] });
+    // Reactively disable endDate when isCurrentRole is toggled
+    grp.get('isCurrentRole')?.valueChanges.subscribe(isCurrent =>
+      isCurrent ? grp.get('endDate')?.disable() : grp.get('endDate')?.enable());
+    this.expArray.push(grp);
+  }
   removeExp(i: number) { this.expArray.removeAt(i); }
   addSkill() { this.skillArray.push(this.fb.group({ name: [''], level: ['Intermediate'] })); }
   addSkillByName(name: string) { this.skillArray.push(this.fb.group({ name: [name], level: ['Intermediate'] })); }
@@ -910,10 +916,43 @@ export class ResumeFormComponent implements OnInit {
   patchResume(data: any) {
     this.form.patchValue({ title: data.title, summary: data.summary, templateId: data.templateId ?? 'classic' });
     this.selectedTemplate = data.templateId ?? 'classic';
-    data.educations?.forEach((e: any) => this.eduArray.push(this.fb.group(e)));
-    data.experiences?.forEach((e: any) => this.expArray.push(this.fb.group(e)));
-    data.skills?.forEach((s: any) => this.skillArray.push(this.fb.group(s)));
-    data.projects?.forEach((p: any) => this.projArray.push(this.fb.group(p)));
+
+    // Helper: convert ISO datetime string to YYYY-MM for <input type="month">
+    const toMonth = (v: string | null | undefined): string => {
+      if (!v) return '';
+      return v.substring(0, 7); // "2020-01-01T..." → "2020-01"
+    };
+
+    data.educations?.forEach((e: any) =>
+      this.eduArray.push(this.fb.group({
+        institution: [e.institution ?? ''],
+        degree: [e.degree ?? ''],
+        fieldOfStudy: [e.fieldOfStudy ?? ''],
+        startDate: [toMonth(e.startDate)],
+        endDate: [toMonth(e.endDate)]
+      })));
+
+    data.experiences?.forEach((e: any) => {
+      const grp = this.fb.group({
+        company: [e.company ?? ''],
+        jobTitle: [e.jobTitle ?? ''],
+        description: [e.description ?? ''],
+        startDate: [toMonth(e.startDate)],
+        endDate: [toMonth(e.endDate)],
+        isCurrentRole: [e.isCurrentRole ?? false]
+      });
+      // Reactively disable endDate when isCurrentRole is true
+      if (e.isCurrentRole) grp.get('endDate')?.disable();
+      grp.get('isCurrentRole')?.valueChanges.subscribe(isCurrent =>
+        isCurrent ? grp.get('endDate')?.disable() : grp.get('endDate')?.enable());
+      this.expArray.push(grp);
+    });
+
+    data.skills?.forEach((s: any) =>
+      this.skillArray.push(this.fb.group({ name: [s.name ?? ''], level: [s.level ?? 'Intermediate'] })));
+
+    data.projects?.forEach((p: any) =>
+      this.projArray.push(this.fb.group({ name: [p.name ?? ''], description: [p.description ?? ''], url: [p.url ?? ''] })));
   }
 
   save(isDraft = false) {
@@ -922,23 +961,29 @@ export class ResumeFormComponent implements OnInit {
       this.currentStep = 0; return;
     }
     this.loading = true;
+
+    // Use getRawValue() — not .value — so disabled controls (e.g. endDate when
+    // isCurrentRole=true) are included in the payload instead of being stripped.
+    const payload = this.form.getRawValue() as any;
+
     const req = this.isEdit
-      ? this.resumeService.updateResume(this.resumeId!, this.form.value as any)
-      : this.resumeService.createResume(this.form.value as any);
+      ? this.resumeService.updateResume(this.resumeId!, payload)
+      : this.resumeService.createResume(payload);
 
     req.subscribe({
       next: res => {
         this.loading = false;
-        if (!this.isEdit && res.data?.id) {
-          this.resumeId = res.data.id;
+        if (!this.isEdit && res.data?.resumeId) {
+          this.resumeId = res.data.resumeId;  // backend returns { resumeId: '...' }
           this.isEdit = true;
         }
         this.snack.open(isDraft ? 'Draft saved!' : 'Resume saved successfully!', 'OK', { duration: 3000 });
         if (!isDraft) this.router.navigate(['/seeker/resumes']);
       },
-      error: () => {
+      error: (err) => {
         this.loading = false;
-        this.snack.open('Error saving resume', 'Close', { duration: 3000 });
+        const msg = err?.error?.message ?? err?.error?.errors?.[0] ?? 'Error saving resume. Please check your inputs.';
+        this.snack.open(msg, 'Close', { duration: 4000 });
       }
     });
   }
