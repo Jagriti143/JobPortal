@@ -969,4 +969,3 @@ C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\JobCatalogService\obj\Debug\n
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\JobCatalogService\obj\Debug\net10.0\JobCatalogService.pdb
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\JobCatalogService\obj\Debug\net10.0\JobCatalogService.genruntimeconfig.cache
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\JobCatalogService\obj\Debug\net10.0\ref\JobCatalogService.dll
-C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\JobCatalogService\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -22,7 +22,11 @@ import { Company } from '../../../core/models/index';
     <div class="page-wrap-sm">
       <div class="flex items-center gap-16 mb-24">
         <button mat-icon-button routerLink="/recruiter/dashboard"><mat-icon>arrow_back</mat-icon></button>
-        <h2>Post a New Job</h2>
+        <h2>{{ isEditMode ? 'Edit Job Listing' : 'Post a New Job' }}</h2>
+        <span class="mode-badge" [class.edit-badge]="isEditMode">
+          <mat-icon>{{ isEditMode ? 'edit' : 'add_circle' }}</mat-icon>
+          {{ isEditMode ? 'Editing' : 'New Listing' }}
+        </span>
       </div>
 
       <!-- Company not found error state -->
@@ -37,13 +41,35 @@ import { Company } from '../../../core/models/index';
       </div>
 
       <!-- Loading state -->
-      <div *ngIf="loadingCompany && !companyError" class="company-loading">
+      <div *ngIf="(loadingCompany || loadingJob) && !companyError" class="company-loading">
         <mat-spinner diameter="36"></mat-spinner>
-        <p>Loading your company details...</p>
+        <p>{{ loadingJob ? 'Loading job details...' : 'Loading your company details...' }}</p>
+      </div>
+
+      <!-- Edit mode: job not found -->
+      <div *ngIf="jobNotFound" class="no-company-card">
+        <div class="no-company-icon">
+          <mat-icon style="color:#f87171">work_off</mat-icon>
+        </div>
+        <h3>Job Not Found</h3>
+        <p>This job listing could not be found or you don't have permission to edit it.</p>
+        <button mat-raised-button color="primary" routerLink="/recruiter/dashboard">Back to Dashboard</button>
       </div>
 
       <!-- Main form — only shown when company is loaded -->
-      <ng-container *ngIf="company() && !loadingCompany">
+      <ng-container *ngIf="company() && !loadingCompany && !loadingJob && !jobNotFound">
+
+        <!-- Edit notice for approved jobs -->
+        <div class="edit-notice" *ngIf="isEditMode && existingJob?.moderationStatus === 'Approved'">
+          <mat-icon>info</mat-icon>
+          <span>This job is currently <strong>live</strong>. Saving changes will reset its status to <strong>Pending</strong> for re-moderation.</span>
+        </div>
+
+        <!-- Edit notice for pending jobs -->
+        <div class="edit-notice pending-notice" *ngIf="isEditMode && existingJob?.moderationStatus === 'Pending'">
+          <mat-icon>pending</mat-icon>
+          <span>This job is <strong>awaiting moderation</strong>. You can update it and it will remain in the review queue.</span>
+        </div>
 
         <!-- Read-only Company Banner -->
         <div class="company-banner">
@@ -135,18 +161,36 @@ import { Company } from '../../../core/models/index';
               </form>
             </mat-step>
 
-            <!-- Step 3: Publish -->
-            <mat-step label="Publish">
+            <!-- Step 3: Review & Publish / Save -->
+            <mat-step [label]="isEditMode ? 'Save Changes' : 'Publish'">
               <div class="step-content text-center">
-                <mat-icon class="publish-icon">rocket_launch</mat-icon>
-                <h3>Ready to publish?</h3>
+                <mat-icon class="publish-icon">{{ isEditMode ? 'save' : 'rocket_launch' }}</mat-icon>
+                <h3>{{ isEditMode ? 'Save your changes?' : 'Ready to publish?' }}</h3>
                 <p class="text-muted mb-16">Posting as <strong>{{ company()!.name }}</strong></p>
-                <p class="text-muted mb-24">Your listing will go through a brief moderation review before going live.</p>
+                <p class="text-muted mb-24" *ngIf="!isEditMode">Your listing will go through a brief moderation review before going live.</p>
+                <p class="text-muted mb-24" *ngIf="isEditMode && existingJob?.moderationStatus === 'Approved'">
+                  <mat-icon inline style="color:#d97706">warning</mat-icon>
+                  Saving will put the job back into <strong>Pending</strong> moderation.
+                </p>
+
+                <!-- Review summary -->
+                <div class="review-summary" *ngIf="isEditMode">
+                  <div class="summary-row"><span class="summary-label">Title</span><span class="summary-value">{{ basicForm.value.title }}</span></div>
+                  <div class="summary-row"><span class="summary-label">Type</span><span class="summary-value">{{ basicForm.value.jobType }}</span></div>
+                  <div class="summary-row"><span class="summary-label">Location</span><span class="summary-value">{{ basicForm.value.location }}</span></div>
+                  <div class="summary-row" *ngIf="detailsForm.value.salaryMin">
+                    <span class="summary-label">Salary</span>
+                    <span class="summary-value">₹{{ detailsForm.value.salaryMin | number }}{{ detailsForm.value.salaryMax ? ' – ₹' + (detailsForm.value.salaryMax | number) : ' onwards' }}</span>
+                  </div>
+                </div>
+
                 <div class="flex justify-center gap-16">
                   <button mat-button matStepperPrevious>Back</button>
-                  <button mat-raised-button color="primary" [disabled]="loading" (click)="submit()">
+                  <button mat-raised-button color="primary" [disabled]="loading" (click)="submit()"
+                    [class.edit-submit-btn]="isEditMode">
                     <mat-spinner diameter="18" *ngIf="loading" style="display:inline-block;margin-right:8px"></mat-spinner>
-                    <span>{{ loading ? 'Publishing...' : 'Publish Job Listing' }}</span>
+                    <mat-icon *ngIf="!loading">{{ isEditMode ? 'save' : 'rocket_launch' }}</mat-icon>
+                    <span>{{ loading ? (isEditMode ? 'Saving...' : 'Publishing...') : (isEditMode ? 'Save Changes' : 'Publish Job Listing') }}</span>
                   </button>
                 </div>
               </div>
@@ -161,6 +205,38 @@ import { Company } from '../../../core/models/index';
     .p-0 { padding: 0; }
     .step-content { padding: 28px; }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Mode badge */
+    .mode-badge {
+      display:flex; align-items:center; gap:5px; padding:4px 12px;
+      border-radius:20px; font-size:.75rem; font-weight:700;
+      background:#f0f7ec; color:#2d4a22; border:1px solid #c5d8bc; margin-left:auto;
+    }
+    .mode-badge mat-icon { font-size:14px; width:14px; height:14px; }
+    .edit-badge { background:#fff7ed; color:#92400e; border-color:#fcd34d; }
+
+    /* Edit notices */
+    .edit-notice {
+      display:flex; align-items:flex-start; gap:10px;
+      background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px;
+      padding:12px 16px; margin-bottom:14px; font-size:.85rem; color:#1e3a5f; line-height:1.5;
+    }
+    .edit-notice mat-icon { font-size:18px; width:18px; height:18px; color:#3b82f6; flex-shrink:0; margin-top:1px; }
+    .pending-notice { background:#fffbeb; border-color:#fde68a; color:#78350f; }
+    .pending-notice mat-icon { color:#d97706; }
+
+    /* Review summary */
+    .review-summary {
+      background:#f8faf6; border:1px solid #e8ede4; border-radius:10px;
+      padding:14px 18px; margin:0 auto 20px; max-width:360px; text-align:left;
+    }
+    .summary-row { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #f0f7ec; }
+    .summary-row:last-child { border-bottom:none; }
+    .summary-label { font-size:.78rem; color:#64748b; font-weight:600; }
+    .summary-value { font-size:.82rem; color:#1a2e12; font-weight:500; max-width:60%; text-align:right; }
+
+    /* Edit submit button */
+    .edit-submit-btn { background:linear-gradient(135deg,#1a2e12,#3d5a30)!important; }
 
     /* Company Banner */
     .company-banner {
@@ -216,18 +292,25 @@ import { Company } from '../../../core/models/index';
     .company-loading { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 48px; color: #64748b; }
 
     .publish-icon { font-size: 64px; height: 64px; width: 64px; color: var(--primary); display: block; margin: 0 auto 16px; }
-    @media(max-width:600px){ .company-banner{ flex-direction:column } .two-col{grid-template-columns:1fr} }
+    @media(max-width:600px){ .company-banner{ flex-direction:column } .two-col{grid-template-columns:1fr} .mode-badge{display:none} }
   `]
 })
 export class PostJobComponent implements OnInit {
   private fb = inject(FormBuilder);
   private jobService = inject(JobService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private snack = inject(MatSnackBar);
 
   loading = false;
   loadingCompany = true;
+  loadingJob = false;
   companyError = false;
+  jobNotFound = false;
+  isEditMode = false;
+  editJobId: string | null = null;
+  existingJob: any = null;
+
   company = signal<Company | null>(null);
 
   basicForm = this.fb.group({
@@ -238,16 +321,28 @@ export class PostJobComponent implements OnInit {
 
   detailsForm = this.fb.group({
     description: ['', Validators.required],
-    salaryMin: [null],
-    salaryMax: [null]
+    salaryMin: [null as number | null],
+    salaryMax: [null as number | null]
   });
 
   ngOnInit(): void {
+    // Detect edit mode from route param
+    const jobId = this.route.snapshot.paramMap.get('jobId');
+    if (jobId) {
+      this.isEditMode = true;
+      this.editJobId = jobId;
+    }
+
+    // Load company first
     this.jobService.getMyCompany().subscribe({
       next: res => {
         this.loadingCompany = false;
         if (res.success && res.data) {
           this.company.set(res.data);
+          // If edit mode, fetch existing job data after company loads
+          if (this.isEditMode) {
+            this.loadExistingJob(this.editJobId!);
+          }
         } else {
           this.companyError = true;
         }
@@ -255,6 +350,36 @@ export class PostJobComponent implements OnInit {
       error: () => {
         this.loadingCompany = false;
         this.companyError = true;
+      }
+    });
+  }
+
+  private loadExistingJob(jobId: string): void {
+    this.loadingJob = true;
+    this.jobService.getJob(jobId).subscribe({
+      next: res => {
+        this.loadingJob = false;
+        if (res.success && res.data) {
+          const job = res.data;
+          this.existingJob = job;
+          // Pre-fill the forms
+          this.basicForm.patchValue({
+            title: job.title ?? '',
+            jobType: job.jobType ?? 'FullTime',
+            location: job.location ?? ''
+          });
+          this.detailsForm.patchValue({
+            description: job.description ?? '',
+            salaryMin: job.salaryMin ?? null,
+            salaryMax: job.salaryMax ?? null
+          });
+        } else {
+          this.jobNotFound = true;
+        }
+      },
+      error: () => {
+        this.loadingJob = false;
+        this.jobNotFound = true;
       }
     });
   }
@@ -270,28 +395,44 @@ export class PostJobComponent implements OnInit {
     }
 
     this.loading = true;
-    // Note: companyId is NOT sent — backend resolves it from the recruiter's JWT
     const payload = {
-      title: this.basicForm.value.title,
-      jobType: this.basicForm.value.jobType,
-      location: this.basicForm.value.location,
+      title:       this.basicForm.value.title,
+      jobType:     this.basicForm.value.jobType,
+      location:    this.basicForm.value.location,
       description: this.detailsForm.value.description,
-      salaryMin: this.detailsForm.value.salaryMin || undefined,
-      salaryMax: this.detailsForm.value.salaryMax || undefined
+      salaryMin:   this.detailsForm.value.salaryMin  || undefined,
+      salaryMax:   this.detailsForm.value.salaryMax  || undefined
     };
 
-    this.jobService.createJob(payload).subscribe({
-      next: () => {
-        this.loading = false;
-        this.snack.open('Job posted! Pending moderation.', 'OK', { duration: 4000 });
-        this.router.navigate(['/recruiter/dashboard']);
-      },
-      error: err => {
-        this.loading = false;
-        const msg = err.error?.message ?? err.error?.data ?? 'Failed to post job';
-        this.snack.open(msg, 'Close', { duration: 5000 });
-        console.error('POST /jobs error:', err.error);
-      }
-    });
+    if (this.isEditMode && this.editJobId) {
+      // UPDATE existing job
+      this.jobService.updateJob(this.editJobId, payload).subscribe({
+        next: () => {
+          this.loading = false;
+          this.snack.open('Job updated successfully! It will be re-reviewed before going live.', 'OK', { duration: 5000 });
+          this.router.navigate(['/recruiter/dashboard']);
+        },
+        error: err => {
+          this.loading = false;
+          const msg = err.error?.message ?? err.error?.data ?? 'Failed to update job';
+          this.snack.open(msg, 'Close', { duration: 5000 });
+        }
+      });
+    } else {
+      // CREATE new job
+      this.jobService.createJob(payload).subscribe({
+        next: () => {
+          this.loading = false;
+          this.snack.open('Job posted! Pending moderation.', 'OK', { duration: 4000 });
+          this.router.navigate(['/recruiter/dashboard']);
+        },
+        error: err => {
+          this.loading = false;
+          const msg = err.error?.message ?? err.error?.data ?? 'Failed to post job';
+          this.snack.open(msg, 'Close', { duration: 5000 });
+          console.error('POST /jobs error:', err.error);
+        }
+      });
+    }
   }
 }

@@ -969,7 +969,6 @@ C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\net10.0\Applicat.04A62F56.Up2Date
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\net10.0\ApplicationService.dll
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\ApplicationService\obj\Debug\net10.0\refint\ApplicationService.dll

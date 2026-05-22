@@ -5,19 +5,17 @@
     </assembly>
     <members>
         <member name="M:AdminService.Controllers.AdminJobsController.GetModerationQueue">
-            <summary>Get jobs pending moderation.</summary>
+            >Get jobs pending moderation.
         </member>
         <member name="M:AdminService.Controllers.AdminJobsController.ApproveJob(System.Guid)">
-            <summary>Approve a job listing.</summary>
+            Approve a job listing.
         </member>
         <member name="M:AdminService.Controllers.AdminJobsController.FlagJob(System.Guid)">
-            <summary>Flag a job listing.</summary>
+            Flag a job listing
         </member>
         <member name="M:AdminService.Controllers.AdminJobsController.NotifyJobCatalogServiceAsync(System.Guid,System.String)">
-            <summary>
             Calls JobCatalogService PATCH /jobs/{id}/status to sync the Elasticsearch index.
             This is fire-and-forget — the admin response is not blocked by this call.
-            </summary>
         </member>
         <member name="M:AdminService.Controllers.AdminReportsController.GetAuditLogs(System.Nullable{System.Guid},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
             <summary>Get paginated audit logs.</summary>

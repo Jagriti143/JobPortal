@@ -1,8 +1,6 @@
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
-using System;
-using System.Threading.Tasks;
 
 class Program
 {
@@ -11,28 +9,27 @@ class Program
         try
         {
             var emailMsg = new MimeMessage();
-            emailMsg.From.Add(new MailboxAddress("Job Portal Support", "karan12k12k@gmail.com"));
-            emailMsg.To.Add(new MailboxAddress("", "karan12k12k@gmail.com"));
-            emailMsg.Subject = "Test Email";
+            emailMsg.From.Add(new MailboxAddress("Job Portal Support", "jagritikamboj9@gmail.com"));
+            emailMsg.To.Add(new MailboxAddress("", "jagritikamboj9@gmail.com"));
+            emailMsg.Subject = "Test OTP Email from Job Portal";
 
-            var bodyBuilder = new BodyBuilder { HtmlBody = "<p>Test</p>" };
+            var bodyBuilder = new BodyBuilder { HtmlBody = "<p>Your 6-digit verification code is: <strong>123456</strong></p><p>This is a test email to verify SMTP configuration.</p>" };
             emailMsg.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
             
-            Console.WriteLine("Connecting...");
+            Console.WriteLine("Step 1: Connecting to smtp.gmail.com:587 with StartTls...");
             await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            Console.WriteLine("Step 2: Connected! Authenticating...");
             
-            Console.WriteLine("Authenticating...");
-            await client.AuthenticateAsync("karan12k12k@gmail.com", "uugtfsmjopovrtpd");
+            await client.AuthenticateAsync("jagritikamboj9@gmail.com", "hvgrljehgdohcctj");
+            Console.WriteLine("Step 3: Authenticated! Sending email...");
             
-            Console.WriteLine("Sending...");
             await client.SendAsync(emailMsg);
+            Console.WriteLine("Step 4: Email sent! Disconnecting...");
             
-            Console.WriteLine("Disconnecting...");
             await client.DisconnectAsync(true);
-            
-            Console.WriteLine("SUCCESS!");
+            Console.WriteLine("SUCCESS: Email sent to jagritikamboj9@gmail.com!");
         }
         catch (Exception ex)
         {

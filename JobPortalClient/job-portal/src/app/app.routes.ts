@@ -21,6 +21,7 @@ export const routes: Routes = [
   // Recruiter
   { path: 'recruiter/dashboard', canActivate: [authGuard, roleGuard('Recruiter')], loadComponent: () => import('./features/recruiter/dashboard/recruiter-dashboard.component').then(m => m.RecruiterDashboardComponent) },
   { path: 'recruiter/jobs/new', canActivate: [authGuard, roleGuard('Recruiter', 'Admin')], loadComponent: () => import('./features/recruiter/jobs/post-job.component').then(m => m.PostJobComponent) },
+  { path: 'recruiter/jobs/:jobId/edit', canActivate: [authGuard, roleGuard('Recruiter')], loadComponent: () => import('./features/recruiter/jobs/post-job.component').then(m => m.PostJobComponent) },
   { path: 'recruiter/jobs/:jobId/applicants', canActivate: [authGuard, roleGuard('Recruiter')], loadComponent: () => import('./features/recruiter/applicants/job-applicants.component').then(m => m.JobApplicantsComponent) },
   { path: 'recruiter/wallet', canActivate: [authGuard, roleGuard('Recruiter')], loadComponent: () => import('./features/recruiter/wallet/wallet.component').then(m => m.RecruiterWalletComponent) },
 

@@ -1,0 +1,5 @@
+{"@t":"2026-05-09T04:54:50.1283649Z","@mt":"User profile is available. Using '{FullName}' as key repository and Windows DPAPI to encrypt keys at rest.","FullName":"C:\\Users\\Jagriti\\AppData\\Local\\ASP.NET\\DataProtection-Keys","EventId":{"Id":63,"Name":"UsingProfileAsKeyRepositoryWithDPAPI"},"SourceContext":"Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager"}
+{"@t":"2026-05-09T04:54:51.9268452Z","@mt":"Now listening on: {address}","address":"http://localhost:5006","EventId":{"Id":14,"Name":"ListeningOnAddress"},"SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-05-09T04:54:52.1370843Z","@mt":"Application started. Press Ctrl+C to shut down.","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-05-09T04:54:52.1439336Z","@mt":"Hosting environment: {EnvName}","EnvName":"Development","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-05-09T04:54:52.1459567Z","@mt":"Content root path: {ContentRoot}","ContentRoot":"C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\AdminService","SourceContext":"Microsoft.Hosting.Lifetime"}

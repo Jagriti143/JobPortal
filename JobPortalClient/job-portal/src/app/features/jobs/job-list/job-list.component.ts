@@ -109,7 +109,7 @@ import { JobService } from '../../../core/services/job.service';
           <div class="jc-footer">
             <span class="salary-tag" *ngIf="job.salaryMin">
               <mat-icon inline>payments</mat-icon>
-              ₹{{ job.salaryMin | number }} – ₹{{ job.salaryMax | number }}
+              ₹{{ job.salaryMin | number }}{{ job.salaryMax ? ' – ₹' + (job.salaryMax | number) : ' onwards' }}
             </span>
             <span class="text-muted text-sm">{{ job.createdAt | date:'mediumDate' }}</span>
           </div>

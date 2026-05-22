@@ -1,0 +1,7 @@
+{"@t":"2026-05-14T08:08:26.8773308Z","@mt":"Configured endpoint {Endpoint}, Consumer: {ConsumerType}","Endpoint":"grant-resume-access","ConsumerType":"ResumeService.Consumers.GrantResumeAccessConsumer","SourceContext":"MassTransit"}
+{"@t":"2026-05-14T08:08:28.8953425Z","@mt":"User profile is available. Using '{FullName}' as key repository and Windows DPAPI to encrypt keys at rest.","FullName":"C:\\Users\\Jagriti\\AppData\\Local\\ASP.NET\\DataProtection-Keys","EventId":{"Id":63,"Name":"UsingProfileAsKeyRepositoryWithDPAPI"},"SourceContext":"Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager"}
+{"@t":"2026-05-14T08:08:33.3499146Z","@mt":"Now listening on: {address}","address":"http://localhost:5004","EventId":{"Id":14,"Name":"ListeningOnAddress"},"SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-05-14T08:08:33.9687348Z","@mt":"Bus started: {HostAddress}","HostAddress":"rabbitmq://localhost/","SourceContext":"MassTransit"}
+{"@t":"2026-05-14T08:08:34.1797663Z","@mt":"Application started. Press Ctrl+C to shut down.","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-05-14T08:08:34.1826965Z","@mt":"Hosting environment: {EnvName}","EnvName":"Development","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-05-14T08:08:34.1837548Z","@mt":"Content root path: {ContentRoot}","ContentRoot":"C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\ResumeService","SourceContext":"Microsoft.Hosting.Lifetime"}

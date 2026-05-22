@@ -981,7 +981,6 @@ C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net1
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net10.0\PaymentS.0CEDD34D.Up2Date
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net10.0\PaymentService.dll
 C:\Users\Jagriti\Desktop\JobPortal\JobPortalSystem\PaymentService\obj\Debug\net10.0\refint\PaymentService.dll

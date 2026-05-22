@@ -96,13 +96,39 @@ public class ElasticsearchService(ElasticsearchClient client, IConfiguration con
         if (!string.IsNullOrWhiteSpace(jobType))
             filters.Add(f => f.Term(t => t.Field("jobType").Value(jobType)));
 
-        if (salaryMin.HasValue)
-            filters.Add(f => f.Range(r => r.Number(n => n
-                .Field(d => d.SalaryMax).Gte((double)salaryMin.Value))));
+        // Salary range overlap filter:
+        // A job matches if its salary range [SalaryMin, SalaryMax] overlaps with [filterMin, filterMax].
+        // Overlap condition: jobSalaryMin <= filterMax  AND  (jobSalaryMax >= filterMin OR jobSalaryMax is null)
+        if (salaryMin.HasValue || salaryMax.HasValue)
+        {
+            var minVal = salaryMin.HasValue ? (double)salaryMin.Value : (double?)null;
+            var maxVal = salaryMax.HasValue ? (double)salaryMax.Value : (double?)null;
 
-        if (salaryMax.HasValue)
-            filters.Add(f => f.Range(r => r.Number(n => n
-                .Field(d => d.SalaryMin).Lte((double)salaryMax.Value))));
+            filters.Add(f => f.Bool(b => b.Must(mustClauses =>
+            {
+                var conditions = new List<Action<QueryDescriptor<JobDocument>>>();
+
+                // Condition 1: jobSalaryMin <= filterMax  (job starts below the filter ceiling)
+                if (maxVal.HasValue)
+                    conditions.Add(c => c.Range(r => r.Number(n => n
+                        .Field(d => d.SalaryMin).Lte(maxVal.Value))));
+
+                // Condition 2: jobSalaryMax >= filterMin  OR  jobSalaryMax is null
+                // (job's upper end reaches the filter floor, or the job has open-ended salary)
+                if (minVal.HasValue)
+                {
+                    var floor = minVal.Value;
+                    conditions.Add(c => c.Bool(inner => inner.Should(
+                        // Case A: SalaryMax exists and >= filterMin
+                        s => s.Range(r => r.Number(n => n.Field(d => d.SalaryMax).Gte(floor))),
+                        // Case B: SalaryMax is absent (open-ended salary) — always passes this check
+                        s => s.Bool(nb => nb.MustNot(mn => mn.Exists(e => e.Field(d => d.SalaryMax))))
+                    ).MinimumShouldMatch(1)));
+                }
+
+                mustClauses.Bool(inner => inner.Must(conditions.ToArray()));
+            })));
+        }
 
         // Build must clauses — these affect relevance scoring
         var musts = new List<Action<QueryDescriptor<JobDocument>>>();

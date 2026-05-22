@@ -1,13 +1,26 @@
 {
   "version": 2,
-  "dgSpecHash": "lVJVIonHkoo=",
+  "dgSpecHash": "vJlhFxlM+t4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Karan\\Desktop\\JobPortalSystem\\test_email\\test_email.csproj",
+  "projectFilePath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\test_email\\test_email.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Karan\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
-    "C:\\Users\\Karan\\.nuget\\packages\\mailkit\\4.15.1\\mailkit.4.15.1.nupkg.sha512",
-    "C:\\Users\\Karan\\.nuget\\packages\\mimekit\\4.15.1\\mimekit.4.15.1.nupkg.sha512",
-    "C:\\Users\\Karan\\.nuget\\packages\\system.security.cryptography.pkcs\\10.0.0\\system.security.cryptography.pkcs.10.0.0.nupkg.sha512"
+    "C:\\Users\\Jagriti\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
+    "C:\\Users\\Jagriti\\.nuget\\packages\\mailkit\\4.15.1\\mailkit.4.15.1.nupkg.sha512",
+    "C:\\Users\\Jagriti\\.nuget\\packages\\mimekit\\4.15.1\\mimekit.4.15.1.nupkg.sha512",
+    "C:\\Users\\Jagriti\\.nuget\\packages\\system.security.cryptography.pkcs\\10.0.0\\system.security.cryptography.pkcs.10.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "Package 'MailKit' 4.15.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-9j88-vvj5-vhgr",
+      "projectPath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\test_email\\test_email.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\test_email\\test_email.csproj",
+      "libraryId": "MailKit",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

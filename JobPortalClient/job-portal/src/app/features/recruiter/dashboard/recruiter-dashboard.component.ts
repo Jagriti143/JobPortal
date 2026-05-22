@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -119,6 +119,11 @@ import { Company } from '../../../core/models/index';
                   <span class="applicant-count" *ngIf="applicantCounts[job.id] !== undefined">
                     ({{ applicantCounts[job.id] }})
                   </span>
+                </button>
+                <button mat-stroked-button class="edit-job-btn" title="Edit job listing"
+                  (click)="editJob(job)">
+                  <mat-icon>edit</mat-icon>
+                  Edit
                 </button>
                 <button mat-icon-button color="warn" title="Delete job listing"
                   (click)="deleteJob(job)" [disabled]="job._deleting">
@@ -381,7 +386,8 @@ import { Company } from '../../../core/models/index';
     .job-meta { display:flex;flex-wrap:wrap;gap:10px }
     .job-meta span { display:flex;align-items:center;gap:3px;font-size:.78rem;color:#64748b }
     .job-meta mat-icon { font-size:13px;width:13px;height:13px }
-    .job-card-right { display:flex;align-items:center;gap:10px;flex-shrink:0 }
+    .job-card-right { display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end }
+    .edit-job-btn { color:#6b8660!important;border-color:#6b8660!important;font-size:.78rem!important;height:34px!important }
     .applicant-count { font-weight:700 }
     .status-chip { padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px }
     .status-approved { background:rgba(22,163,74,.08);color:#16a34a }
@@ -469,6 +475,7 @@ export class RecruiterDashboardComponent implements OnInit {
   private authService   = inject(AuthService);
   private fb            = inject(FormBuilder);
   private snack         = inject(MatSnackBar);
+  private router        = inject(Router);
 
   // Company edit state
   editMode      = signal(false);
@@ -790,6 +797,10 @@ export class RecruiterDashboardComponent implements OnInit {
         this.snack.open(msg, 'Close', { duration: 4000 });
       }
     });
+  }
+
+  editJob(job: any): void {
+    this.router.navigate(['/recruiter/jobs', job.id, 'edit']);
   }
 
   deleteJob(job: any): void {    if (!confirm(`Delete "${job.title}"? This cannot be undone and the job will no longer appear to job seekers.`)) return;

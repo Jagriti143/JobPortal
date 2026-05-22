@@ -219,23 +219,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Karan\\.nuget\\packages\\": {},
+    "C:\\Users\\Jagriti\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Karan\\Desktop\\JobPortalSystem\\test_email\\test_email.csproj",
+      "projectUniqueName": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\test_email\\test_email.csproj",
       "projectName": "test_email",
-      "projectPath": "C:\\Users\\Karan\\Desktop\\JobPortalSystem\\test_email\\test_email.csproj",
-      "packagesPath": "C:\\Users\\Karan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Karan\\Desktop\\JobPortalSystem\\test_email\\obj\\",
+      "projectPath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\test_email\\test_email.csproj",
+      "packagesPath": "C:\\Users\\Jagriti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jagriti\\Desktop\\JobPortal\\JobPortalSystem\\test_email\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Karan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jagriti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -262,7 +262,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net10.0": {
@@ -289,7 +289,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -566,5 +566,17 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MailKit' 4.15.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-9j88-vvj5-vhgr",
+      "libraryId": "MailKit",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

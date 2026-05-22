@@ -10,7 +10,6 @@
         "tags": [
           "AdminJobs"
         ],
-        "summary": "Get jobs pending moderation.",
         "responses": {
           "200": {
             "description": "OK"
@@ -23,7 +22,6 @@
         "tags": [
           "AdminJobs"
         ],
-        "summary": "Approve a job listing.",
         "parameters": [
           {
             "name": "jobId",
@@ -47,7 +45,6 @@
         "tags": [
           "AdminJobs"
         ],
-        "summary": "Flag a job listing.",
         "parameters": [
           {
             "name": "jobId",

@@ -34,12 +34,21 @@ public class EmailService(IConfiguration config, ILogger<EmailService> logger) :
 
     private async Task SendEmailAsync(string toEmail, string subject, string htmlContent)
     {
+        var host = config["Smtp:Host"] ?? "smtp.gmail.com";
+        var port = config.GetValue<int>("Smtp:Port", 587);
+        var password = config["Smtp:Password"] ?? "";
+        string fromEmail = config["Smtp:Username"] ?? "noreply@jobportal.local";
+        string fromName = config["Smtp:FromName"] ?? "Job Portal Support";
+
+        if (string.IsNullOrEmpty(password) || password == "your-app-password")
+        {
+            logger.LogWarning("Email sending bypassed — configure a real 'Smtp:Password' in appsettings.json");
+            return;
+        }
+
         try
         {
             var emailMsg = new MimeMessage();
-            string fromEmail = config["Smtp:Username"] ?? "noreply@jobportal.local";
-            string fromName = config["Smtp:FromName"] ?? "Job Portal Support";
-            
             emailMsg.From.Add(new MailboxAddress(fromName, fromEmail));
             emailMsg.To.Add(new MailboxAddress("", toEmail));
             emailMsg.Subject = subject;
@@ -48,30 +57,23 @@ public class EmailService(IConfiguration config, ILogger<EmailService> logger) :
             emailMsg.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
-            
-            var host = config["Smtp:Host"] ?? "smtp.gmail.com";
-            var port = config.GetValue<int>("Smtp:Port", 587);
-            var useSsl = config.GetValue<bool>("Smtp:EnableSsl", true);
-            var password = config["Smtp:Password"] ?? "";
 
-            await client.ConnectAsync(host, port, SecureSocketOptions.Auto);
-            
-            if (!string.IsNullOrEmpty(password) && password != "your-app-password")
-            {
-                await client.AuthenticateAsync(fromEmail, password);
-            }
-            else
-            {
-                logger.LogWarning("Email sending bypassed. Configure actual 'Smtp:Password' in appsettings.json to send emails.");
-                return;
-            }
+            logger.LogInformation("SMTP: Connecting to {Host}:{Port} with StartTls...", host, port);
+            await client.ConnectAsync(host, port, SecureSocketOptions.StartTls);
 
+            logger.LogInformation("SMTP: Authenticating as {User}...", fromEmail);
+            await client.AuthenticateAsync(fromEmail, password);
+
+            logger.LogInformation("SMTP: Sending email to {To} — subject: {Subject}", toEmail, subject);
             await client.SendAsync(emailMsg);
             await client.DisconnectAsync(true);
+
+            logger.LogInformation("SMTP: Email sent successfully to {To}", toEmail);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to send email to {Email} — swallowing error", toEmail);
+            logger.LogError(ex, "SMTP: Failed to send email to {Email}. Host={Host}, Port={Port}", toEmail, host, port);
         }
     }
 }
+

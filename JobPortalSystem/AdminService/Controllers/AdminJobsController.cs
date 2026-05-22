@@ -21,7 +21,7 @@ public class AdminJobsController(
     private Guid GetAdminId() => Guid.Parse(
         User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
 
-    /// <summary>Get jobs pending moderation.</summary>
+    /// >Get jobs pending moderation.
     [HttpGet("moderation-queue")]
     public async Task<IActionResult> GetModerationQueue()
     {
@@ -29,7 +29,7 @@ public class AdminJobsController(
         return Ok(ResponseEnvelope<object>.Ok(jobs, traceId: HttpContext.TraceIdentifier));
     }
 
-    /// <summary>Approve a job listing.</summary>
+    /// Approve a job listing.
     [HttpPost("{jobId:guid}/approve")]
     public async Task<IActionResult> ApproveJob(Guid jobId)
     {
@@ -52,7 +52,7 @@ public class AdminJobsController(
         return Ok(ResponseEnvelope<object>.Ok(new { jobId, status = "Approved" }, traceId: traceId));
     }
 
-    /// <summary>Flag a job listing.</summary>
+    /// Flag a job listing
     [HttpPost("{jobId:guid}/flag")]
     public async Task<IActionResult> FlagJob(Guid jobId)
     {
@@ -75,10 +75,10 @@ public class AdminJobsController(
         return Ok(ResponseEnvelope<object>.Ok(new { jobId, status = "Flagged" }, traceId: traceId));
     }
 
-    /// <summary>
+    
     /// Calls JobCatalogService PATCH /jobs/{id}/status to sync the Elasticsearch index.
     /// This is fire-and-forget — the admin response is not blocked by this call.
-    /// </summary>
+    
     private async Task NotifyJobCatalogServiceAsync(Guid jobId, string status)
     {
         try
